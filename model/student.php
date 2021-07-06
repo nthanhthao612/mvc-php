@@ -68,5 +68,6 @@ class student{
                 return ((int)$nam * 1000000) + (54 * 10000) + 1;
         }
     }
+    
 }
 ?>

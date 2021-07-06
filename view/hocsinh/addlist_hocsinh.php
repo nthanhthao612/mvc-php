@@ -8,7 +8,7 @@
     <div id="edit-form" style="margin-top: 50px">
         <form action="" method="POST" enctype="multipart/form-data">
           <input type="file" name="excel">
-          <button type="submit" name="add-list-mark">Submit</button>
+          <button type="submit" name="add-list-student">Submit</button>
         </form>
     </div>
   </div>

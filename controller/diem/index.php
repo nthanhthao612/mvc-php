@@ -37,7 +37,29 @@ switch ($action) {
         }
     case 'add-list':
         {
-            
+            if(isset($_POST['add-list-mark'])){
+                $data = array();
+                if(isset($_FILES['excel']['name'])){
+                        $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
+                        $data = $excel->rows();
+                }
+                for($i = 1;$i<count($data);$i++){
+                    $temp = $data[$i];
+                        $mamh = $temp[0];
+                        $mahs = $temp[1];
+                        $mahk = $temp[2];
+                        $magv = $temp[3];
+                        $diemmieng = $temp[4];
+                        $diem15p = $temp[5];
+                        $diem1tiet = $temp[6];
+                        $diemhk = $temp[7];
+                        if($diem->checkExist($mahs,$mahk,$mamh)[0] == 0)
+                            $diem->insertMark($mamh,$mahs,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk);
+                        else
+                            $diem->updateMark($mamh,$mahs,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk);
+                    }
+                header('location:index.php?controller=diem&action=');
+            }
             require_once 'view/diem/addlist_diem.php';
             break;
         }

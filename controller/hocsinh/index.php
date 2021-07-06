@@ -5,7 +5,34 @@ if (isset($_GET['action'])) {
     $action = '';
 }
 
-switch ($action) { 
+switch ($action) {
+    case 'add-list':
+        {
+            if(isset($_POST['add-list-student'])){
+                $data = array();
+                if(isset($_FILES['excel']['name'])){
+                        $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
+                        $data = $excel->rows();
+                }
+                for($i = 1;$i<count($data);$i++){
+                    $temp = $data[$i];
+                        $malop = $temp[0];
+                        $hotendem = $temp[1];
+                        $ten = $temp[2];
+                        $gioitinh = $temp[3];
+                        $nam = $temp[4];
+                        $ngaysinh = $temp[5];
+                        $diachi = $temp[6];
+                        $mahs = $hocsinh->setID($malop,$nam);
+                        if($hocsinh->getInfoStudent($mahs)[0]==0){
+                            $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
+                        }
+                    }
+                header('location:index.php?controller=hoc-sinh&action=');
+            }
+            require_once 'view/hocsinh/addlist_hocsinh.php';
+            break;
+        }
     case 'add':
         {
             if($ss->checkLogin() == True){

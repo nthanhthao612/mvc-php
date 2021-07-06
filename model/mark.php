@@ -1,8 +1,10 @@
 <?php
 class mark{
     private $db;
+    public $temp;
     public function __construct(){
         $this->db = new database();
+        $this->temp = array();
     }
     public function calculateAVE($diemmieng,$diem15p,$diem1tiet,$diemhk){
         return ($diemmieng+$diem15p+$diem1tiet*2+$diemhk*3)/7;
@@ -116,6 +118,11 @@ class mark{
     public function deleteMark($mamh,$mahs,$mahk){
         $sql = "DELETE FROM bangdiem WHERE mahs = '$mahs' AND mamh='$mamh' AND mahk = '$mahk'";
         $result = $this->db->delete($sql);
+        return $result;
+    }
+    public function checkExist($mahs,$mahk,$mamh){
+        $sql = "SELECT * FROM bangdiem WHERE mahs = '$mahs' AND mahk = '$mahk' AND mamh = '$mamh'";
+        $result = $this->db->selectALot($sql);
         return $result;
     }
 }
