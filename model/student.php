@@ -60,12 +60,10 @@ class student{
             return (int)$this->getMaxID($malop,$nam)['MAX(hs.mahs)'] + 1;
         }
         else{
-            if($this->getSubjectGroup($malop) =='A')
+            if($this->getSubjectGroup($malop)[0] =='A')
                 return ((int)$nam * 1000000) + (41 * 10000) + 1;
-            else if($this->getSubjectGroup($malop) =='D')
-                return ((int)$nam * 1000000) + (44 * 10000) + 1;
             else 
-                return ((int)$nam * 1000000) + (54 * 10000) + 1;
+                return ((int)$nam * 1000000) + (44 * 10000) + 1;
         }
     }
     
