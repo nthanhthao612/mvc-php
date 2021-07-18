@@ -45,18 +45,20 @@ switch ($action) {
                     $diachi = $_POST['diachi'];
                     $nam = $_POST['nam'];
                     $mahs = $hocsinh->setID($malop,$nam);
-                    if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi)){
-                        header('location: index.php?controller=hoc-sinh&action=list');
-                        echo "<script>alert('Thành Công!')</script>";
-                    }
-                    else{
-                        echo "<script>alert('Thất Bại!')</script>";
+                    if($hocsinh->authentication($ss->get('userID'),$malop)){
+                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi)){
+                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
+                            echo "<script>alert('Thành Công!')</script>";
+                        }
+                        else{
+                            echo "<script>alert('Thất Bại!')</script>";
+                        }
                     }
                 }
                 require_once 'view/hocsinh/add_hocsinh.php';
             }
             else{
-                header('location: index.php?controller=hoc-sinh&action=list');
+                header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                 echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>"; 
             }
             break;
@@ -76,40 +78,45 @@ switch ($action) {
                     $gioitinh = $_POST['gioitinh'];
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
-                    if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi)){
-                        header('location: index.php?controller=hoc-sinh&action=list');
-                        echo "<script>alert('thanh cong')</script>";
-                    }
-                    else{
-                        header('location: index.php?controller=hoc-sinh&action=list');
-                        echo "<script>alert('That bai')</script>";   
+                    if($hocsinh->authentication($ss->get('userID'),$malop)){
+                        if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi)){
+                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
+                            echo "<script>alert('thanh cong')</script>";
+                        }
+                        else{
+                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
+                            echo "<script>alert('That bai')</script>";   
+                        }
                     }
                 }
                 require_once 'view/hocsinh/edit_hocsinh.php';
             }
             else{
-                header('location: index.php?controller=hoc-sinh&action=list');
+                header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                 echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>"; 
             }
             break;
         }
     case 'delete':
         {
+            $malop = $_GET['malop'];
             if($ss->checkLogin() == True){
                 if(isset($_GET['mahs'])){
                     $mahs = $_GET['mahs'];
-                    if($hocsinh->deleteInfo($mahs)){
-                        header('location: index.php?controller=hoc-sinh&action=list');
-                        echo "<script>alert('thanh cong')</script>";
-                    }
-                    else{
-                        header('location: index.php?controller=hoc-sinh&action=list');
-                        echo "<script>alert('That bai')</script>";
-                    }
+                    if($hocsinh->authentication($ss->get('userID'),$malop)){
+                        if($hocsinh->deleteInfo($mahs)){
+                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
+                            echo "<script>alert('thanh cong')</script>";
+                        }
+                        else{
+                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
+                            echo "<script>alert('That bai')</script>";
+                        }
+                    } 
                 }
             }
             else{
-                header('location: index.php?controller=hoc-sinh&action=list');
+                header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                 echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>";
             }
             break;

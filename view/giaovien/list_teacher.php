@@ -6,7 +6,12 @@
 <body>
   <div id="main-body">
     <div id="main-function">
-      <a href="index.php?controller=giao-vien&action=add" class="btn btn-primary">Thêm</a>
+      <?php
+        if($ss->get('username')=='admin'){
+          echo '<a href="index.php?controller=giao-vien&action=add" class="btn btn-primary">Thêm</a>';
+        }
+      ?>
+      
       <div>
         <div id="filter-box" class="search-form">
           <form action="" method="GET">

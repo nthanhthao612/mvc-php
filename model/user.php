@@ -50,5 +50,10 @@ class user{
     public function logoutUser(){
         $this->ss->destroy();
     }
+    public function getInfoUser($magv){
+        $sql = "SELECT * FROM giaovien WHERE magv = '$magv'";
+        $result = $this->db->selectOne($sql);
+        return $result;
+    }
 }
 ?>

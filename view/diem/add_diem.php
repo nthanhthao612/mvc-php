@@ -1,10 +1,8 @@
-<!-- <?php
-echo "<pre>";
-echo $temp['count'];
-?> -->
+<?php
+?>
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Thêm Điểm</title>
 </head>
 <body>
   <div id="main-body">

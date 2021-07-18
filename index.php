@@ -2,7 +2,6 @@
     include 'lib/format.php';
     include 'lib/session.php';
     include 'lib/database.php';
-    include 'lib/PHPExcel.php';
     include 'lib/SimpleXLSX.php';
     include 'model/student.php';
     include 'model/schoolclass.php';

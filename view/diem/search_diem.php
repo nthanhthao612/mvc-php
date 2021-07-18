@@ -1,8 +1,7 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Tìm kiếm</title>
 </head>
-
 <body>
   <div id="main-body">
     <div id="main-function">

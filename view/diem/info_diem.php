@@ -1,13 +1,13 @@
 
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Thông tin điểm</title>
 </head>
 
 <body>
   <div id="main-body">
     <div id="main-function">
-      <a href="index.php?controller=diem&action=add&mahs=<?php echo $_GET['mahs'];?>" class="btn btn-primary">Thêm</a>
+      <a href="index.php?controller=diem&action=add&mahs=<?php echo $_GET['mahs'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Thêm</a>
     </div>
     <div id="main-content">
     <?php
@@ -52,8 +52,8 @@
                 <th scope="row"><?php echo $value['diemhk']; ?> </th>
                 <th scope="row"><?php echo $value['diemtb']; ?> </th>
                 <td>
-                    <a href="index.php?controller=diem&action=edit&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>" class="btn btn-primary">Sửa</a>
-                    <a href="index.php?controller=diem&action=delete&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>" class="btn btn-primary">Xóa</a>
+                    <a href="index.php?controller=diem&action=edit&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Sửa</a>
+                    <a href="index.php?controller=diem&action=delete&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Xóa</a>
                 </td>
               </tr>
               <?php
@@ -81,3 +81,5 @@
 </body>
 
 </html>
+
+

@@ -36,7 +36,6 @@
       </div>
     </div>
     <div id="main-content">
-      <a href="index.php?controller=diem&action=add-list" class="btn btn-primary">Thêm với file Excel</a>
       <table class="table">
         <thead>
           <tr>

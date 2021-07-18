@@ -1,20 +1,18 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Danh sách xếp loại theo lớp</title>
 </head>
 
 <body>
   <div id="main-body">
+    
+    <?php
+      if($ss->checkLogin()==TRUE){
+        echo '<a href="index.php?controller=diem&action=add&malop='.$malop.'" class="btn btn-primary">Thêm</a>&emsp;';
+        echo '<a href="index.php?controller=diem&action=add-list&malop='.$malop.'" class="btn btn-primary">Thêm với file Excel</a>';
+      }
+    ?>
     <div id="main-function">
-      <form action="" method="get">
-        <input type="hidden" name="controller" value="diem">
-        <input type="hidden" name="action" value="add-list">
-        <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
-        <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
-        <input type="text" name="mamh" id="">
-        <input type="submit" value="Thêm" class="btn btn-primary" >
-      </form>
-      <!-- <a href="index.php?controller=diem&action=add-list&malop=<?php echo $_GET['malop'];?>&mahk=<?php echo $_GET['mahk'];?>" class="btn btn-primary">Thêm</a> -->
       <div>
         <div id="filter-box" class="search-form">
           <form action="" method="GET">
@@ -73,8 +71,8 @@
               <th scope="row"><?php echo $value['malop']; ?> </th>
               <th scope="row"><?php echo $value['xeploai'];?></th>
               <td>
-                  <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $_GET['mahk'];?>" class="btn btn-primary">Xem chi tiết điểm</a>
-                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Thông tin</a>
+                  <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $_GET['mahk'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Xem chi tiết điểm</a>
+                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Thông tin</a>
               </td>
             </tr>
             <?php

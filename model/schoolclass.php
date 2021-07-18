@@ -40,7 +40,7 @@ class schoolclass{
         return $result;
     }
     public function listTeacher($malop){
-        $sql = "SELECT gv.magv,gv.tengv,gv.hotendemgv,l.malop,gv.mamh,mh.tenmh FROM giaovien AS gv,monhoc AS mh, bangdiem AS bd, lop AS l,hocsinh AS hs WHERE mh.mamh = gv.mamh AND hs.malop = '$malop' AND gv.magv = bd.magv AND hs.malop = l.malop AND bd.mahs = hs.mahs GROUP BY gv.magv";
+        $sql = "SELECT gv.magv,gv.tengv,gv.hotendemgv,l.malop,gv.mamh,mh.tenmh,bd.mahk FROM giaovien AS gv,monhoc AS mh, bangdiem AS bd, lop AS l,hocsinh AS hs WHERE mh.mamh = gv.mamh AND hs.malop = '$malop' AND gv.magv = bd.magv AND hs.malop = l.malop AND bd.mahs = hs.mahs GROUP BY gv.magv";
         $result = $this->db->selectALot($sql);
         return $result;
     }

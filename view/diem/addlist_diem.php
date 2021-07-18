@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Thêm điểm bằng File Excel</title>
 </head>
 <body>
   <div id="main-body">

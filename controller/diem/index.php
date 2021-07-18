@@ -9,6 +9,7 @@ if (isset($_GET['action'])) {
 switch ($action) {
     case 'add':
         {
+            $malop = $_GET['malop'];
             if($ss->checkLogin() == True){
                 if (isset($_POST['add_diem'])){
                     $mahs = $_POST['mahs'];
@@ -19,12 +20,14 @@ switch ($action) {
                     $diem15p = $_POST['diem15p'];
                     $diem1tiet = $_POST['diem1tiet'];
                     $diemhk = $_POST['diemhk'];
-                    if($diem->insertMark($mamh,$mahs,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
-                        header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk");
-                        echo "<script>alert('Thêm Thành Công!')</script>";
-                    }
-                    else{
-                        echo "<script>alert('Thêm Thất bại!')</script>";
+                    if($diem->authentication($ss->get('userID'),$_GET['malop'],$mamh)){
+                        if($diem->insertMark($mamh,$mahs,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
+                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
+                            echo "<script>alert('Thêm Thành Công!')</script>";
+                        }
+                        else{
+                            echo "<script>alert('Thêm Thất bại!')</script>";
+                        }
                     }
                 }
                 require_once 'view/diem/add_diem.php';
@@ -65,6 +68,7 @@ switch ($action) {
         }
     case 'edit':
         {
+            $malop = $_GET['malop'];
             if($ss->checkLogin() == True){
                 if(isset($_GET['mahs']) and isset($_GET['mamh']) and isset($_GET['mahk'])){
                     $mahs = $_GET['mahs'];
@@ -81,41 +85,48 @@ switch ($action) {
                     $diem15p = $_POST['diem15p'];
                     $diem1tiet = $_POST['diem1tiet'];
                     $diemhk = $_POST['diemhk'];
-                    if($diem->updateMark($mamh,$mahs,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
-                        header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk");
-                        echo "<script>alert('Sửa Thành Công!')</script>"; 
+                    if($diem->authentication($ss->get('userID'),$_GET['malop'],$mamh)){
+                        if($diem->updateMark($mamh,$mahs,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
+                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
+                            echo "<script>alert('Sửa Thành Công!')</script>"; 
+                        }
+                        else{
+                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
+                            echo "<script>alert('Sửa Thất bại!')</script>";
+                        }
                     }
-                    else{
-                        header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk");
-                        echo "<script>alert('Sửa Thất bại!')</script>";
-                    }
+                    
                 }
                 require_once 'view/diem/edit_diem.php';
             }
             else{
-                header('location: index.php?controller=diem&action=list');
+                header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
                 echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>"; 
             }
             break;
         }
     case 'delete':
         {
+            $malop = $_GET['malop'];
             if($ss->checkLogin() == True){
                 if(isset($_GET['mahs']) AND isset($_GET['mamh']) AND isset($_GET['mahk'])){
                     $mahs = $_GET['mahs'];
                     $mamh = $_GET['mamh'];
                     $mahk = $_GET['mahk'];
-                    if($diem->deleteMark($mamh,$mahs,$mahk)){
-                        header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk");
-                        echo "<script>alert('Sửa Thành Công!')</script>";
-                    }
+                    
+                    if($diem->authentication($ss->get('userID'),$_GET['malop'],$mamh)){
+                        if($diem->deleteMark($mamh,$mahs,$mahk)){
+                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
+                            echo "<script>alert('Xóa Thành Công!')</script>";
+                    }  
+                }
                 else{
-                    header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk");
-                    echo "<script>alert('Sửa Thành Công!')</script>";
+                    header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
+                    echo "<script>alert('Xóa Thành Công!')</script>";
                 }
             }
             else{
-                header('location: index.php?controller=diem&action=list');
+                header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
                 echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>"; 
             }
             break;

@@ -20,13 +20,15 @@ switch ($action) {
                     $diachi = $_POST['diachi'];
                     $magv = $giaovien->setID($mamh,$namgv);
                     $tentk = $magv;
-                    if($giaovien->insertIntoTeacher($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($tentk,$matkhau,$magv)){
-                        header('location: index.php?controller=giao-vien&action=list');
-                        echo "<script>alert('Thành Công!')</script>";
-                    }
-                    else{
-                        echo "<script>alert('Thất Bại!')</script>";
-                    }
+                    if($ss->get('username')=='admin'){
+                        if($giaovien->insertIntoTeacher($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($tentk,$matkhau,$magv)){
+                            header('location: index.php?controller=giao-vien&action=list');
+                            echo "<script>alert('Thành Công!')</script>";
+                        }
+                        else{
+                            echo "<script>alert('Thất Bại!')</script>";
+                        }
+                    }  
                 }
                 require_once 'view/giaovien/add_teacher.php';
             }
@@ -54,14 +56,16 @@ switch ($action) {
                     $diachi = $_POST['diachi'];
                     $magv = $_POST['magv'];
                     $tentk = $magv;
-                    if($giaovien->updateInfo($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($tentk,$matkhau,$magv)){
-                        header("location: index.php?controller=giao-vien&action=info&magv=$magv");
-                        echo "<script>alert('thanh cong')</script>";
-                    }
-                    else{
-                        header("location: index.php?controller=giao-vien&action=info&magv=$magv");
-                        echo "<script>alert('That bai')</script>";   
-                    }
+                    if($ss->get('username')=='admin'){
+                        if($giaovien->updateInfo($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($tentk,$matkhau,$magv)){
+                            header("location: index.php?controller=giao-vien&action=info&magv=$magv");
+                            echo "<script>alert('thanh cong')</script>";
+                        }
+                        else{
+                            header("location: index.php?controller=giao-vien&action=info&magv=$magv");
+                            echo "<script>alert('That bai')</script>";   
+                        }
+                    }   
                 }
                 require_once 'view/giaovien/edit_teacher.php';
             }
@@ -76,14 +80,16 @@ switch ($action) {
             if($ss->checkLogin() == True){
                 if(isset($_GET['magv'])){
                     $magv = $_GET['magv'];
-                    if($taikhoan->deleteUser($magv) AND $giaovien->deleteInfo($magv)){
-                        header("location: index.php?controller=giao-vien&action=list");
-                        echo "<script>alert('thanh cong')</script>";
-                    }
-                    else{
-                        header("location: index.php?controller=giao-vien&action=list");
-                        echo "<script>alert('That bai')</script>";   
-                    }
+                    if($ss->get('username')=='admin'){
+                        if($taikhoan->deleteUser($magv) AND $giaovien->deleteInfo($magv)){
+                            header("location: index.php?controller=giao-vien&action=list");
+                            echo "<script>alert('thanh cong')</script>";
+                        }
+                        else{
+                            header("location: index.php?controller=giao-vien&action=list");
+                            echo "<script>alert('That bai')</script>";   
+                        }
+                    } 
                 }
             }
             else{

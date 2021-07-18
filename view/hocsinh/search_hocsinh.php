@@ -6,7 +6,11 @@
 <body>
   <div id="main-body">
     <div id="main-function">
-      <a href="index.php?controller=hoc-sinh&action=add" class="btn btn-primary">Thêm</a>
+      <?php
+        if($user->checkLogin()){
+          echo "<a href='index.php?controller=hoc-sinh&action=add' class='btn btn-primary'>Thêm</a>";
+        }
+      ?>
       <div>
         <div id="filter-box" class="search-form">
           <form action="" method="GET">
@@ -64,8 +68,7 @@
               <td>
                   <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Xem</a>
                   <a href="index.php?controller=hoc-sinh&action=edit&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Sửa</a>
-                  <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Xóa</a>
-                  <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Điểm</a>
+                  <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Xóa</a>
               </td>
             </tr>
             <?php

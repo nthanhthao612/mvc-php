@@ -1,12 +1,19 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Tìm kiếm</title>
 </head>
 
 <body>
   <div id="main-body">
     <div id="main-function">
-      <a href="index.php?controller=diem&action=add" class="btn btn-primary">Thêm</a>
+      
+      <?php
+        $malop = $_GET['malop'];
+        if($ss->checkLogin()==TRUE){
+          echo '<a href="index.php?controller=diem&action=add&malop='.$malop.'" class="btn btn-primary">Thêm</a>&emsp;';
+          echo '<a href="index.php?controller=diem&action=add-list&malop='.$malop.'" class="btn btn-primary">Thêm với file Excel</a>';
+        }
+      ?>
       <div>
         <div id="filter-box" class="search-form">
           <form action="" method="GET">

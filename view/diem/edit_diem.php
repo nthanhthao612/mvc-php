@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Sửa điểm</title>
 </head>
 <body>
   <div id="main-body">

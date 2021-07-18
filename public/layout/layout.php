@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
+<head>   
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav-bar">
@@ -16,7 +15,9 @@
         <div class="logout-btn-area">
             <?php
                 if($ss->checkLogin()== True){
-                    echo '<a href="index.php?controller=logout" class="btn btn-primary">Logout</a>';
+                    $temp = $taikhoan->getInfoUser($ss->get('userID'));
+                    echo "<span><b>Xin chào! ".$temp['hotendemgv'].' '.$temp['tengv']."</b></span>";
+                    echo '<span><a href="index.php?controller=logout" class="btn btn-primary">Logout</a></span>';
                 }
                 else{
                     echo '<a href="index.php?controller=login" class="btn btn-primary">Login</a>';
@@ -26,7 +27,7 @@
         </div>
     </nav>
     <div id="left-menu-area">
-        <div class="left-menu-btn"><a href="index.php?controller=hoc-sinh&action=">Thông tin</a></div>
+        <div class="left-menu-btn"><a href="index.php?controller=hoc-sinh&action=">Học sinh</a></div>
         <div class="left-menu-btn"><a href="index.php?controller=diem&action=">Điểm</a></div>
         <div class="left-menu-btn"><a href="index.php?controller=lop&action=" >Lớp</a></div>
         <div class="left-menu-btn"><a href="index.php?controller=giao-vien&action=">Giáo viên</a></div>

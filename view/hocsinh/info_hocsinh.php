@@ -7,7 +7,7 @@
   <div id="main-body">
     <div id="main-function">
       <a href="index.php?controller=hoc-sinh&action=edit&mahs=<?php echo $data['mahs'];?>" class="btn btn-primary">Sửa</a>
-      <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $data['mahs'];?>" class="btn btn-primary">Xóa</a>
+      <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $data['mahs'];?>&malop=<?php echo $data['malop'];?>" class="btn btn-primary">Xóa</a>
     </div>
     <div id="main-content">
     <table class="table">

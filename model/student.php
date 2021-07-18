@@ -66,6 +66,13 @@ class student{
                 return ((int)$nam * 1000000) + (44 * 10000) + 1;
         }
     }
-    
+    public function authentication($magv,$malop){
+        $sql = "SELECT * FROM lop WHERE malop = '$malop'";
+        $temp = $this->db->selectALot($sql);
+        if($temp[0]['magv'] == $magv)
+            return True;
+        else
+            return False;
+    }
 }
 ?>
