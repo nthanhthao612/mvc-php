@@ -15,9 +15,6 @@
     </head>
     <body>
         <header>
-            <div class="container">
-                Đầu trang
-            </div>
         </header>
         <main>
             <div class="container">
