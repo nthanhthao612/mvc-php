@@ -9,6 +9,26 @@ class mark{
     public function calculateAVE($diemmieng,$diem15p,$diem1tiet,$diemhk){
         return ($diemmieng+$diem15p+$diem1tiet*2+$diemhk*3)/7;
     }
+    public function initialize(){
+        $namhoc = 2019; 
+        for($mahk=1;$mahk<3;$mahk++){
+            $temp1 = $this->getListSubject();
+            $temp2 = $this->getListStudent();
+            foreach($temp1 as $value1){
+                foreach($temp2 as $value2){
+                    if($this->checkExist($value2['mahs'],$namhoc,$mahk,$value1['mamh'])==0){
+                        $magv = $this->getTeacher($value2['malop'],$value1['mamh']);
+                        $this->insertMark($value1['mamh'],$value2['mahs'],$namhoc,$mahk,$magv[0],0,0,0,0);
+                    }
+                }
+            }
+        }
+    }
+    public function getTeacher($malop,$mamh){
+        $sql = "SELECT mpt.magv FROM monphutrach AS mpt, giaovien AS gv WHERE gv.magv = mpt.magv AND gv.mamh = '$mamh' AND mpt.malop = '$malop'";
+        $result = $this->db->selectOne($sql);
+        return $result;
+    }
     public function classify($diemtk){
         if($diemtk>=8)
             return "Giỏi";
@@ -19,7 +39,6 @@ class mark{
         else
             return "Trung Bình";
     }
-    
     public function countbd($mahs,$mahk,$namhoc){
         $sql = "SELECT COUNT(*) AS count FROM bangdiem WHERE mahs = '$mahs' AND mahk = '$mahk' AND namhoc = '$namhoc'";
         $result = $this->db->selectOne($sql);
@@ -31,8 +50,20 @@ class mark{
             $diemtb = $this->calculateAVE($value['diemmieng'],$value['diem15p'],$value['diem1tiet'],$value['diemhk']);
             $mahs = $value['mahs'];
             $mamh = $value['mamh'];
-            $this->db->update("UPDATE bangdiem SET diemtb = '$diemtb' WHERE mahs = '$mahs' AND mamh = '$mamh'");
+            $namhoc = $value['namhoc'];
+            $magv = $value['magv'];
+            $mahk = $value['mahk'];
+            $this->db->update("UPDATE bangdiem SET diemtb = '$diemtb' WHERE mahk = '$mahk' AND mahs = '$mahs' AND mamh = '$mamh' AND namhoc = '$namhoc' AND magv = '$magv'");
         }
+    }
+    public function checkZeroMark($mahs,$mahk,$namhoc){
+        $sql = "SELECT diemtb FROM bangdiem WHERE mahs = '$mahs' AND mahk = '$mahk' AND namhoc = '$namhoc'";
+        $result = $this->db->selectALot($sql);
+        foreach($result AS $value){
+            if($value['diemtb'] == 0)
+            return TRUE;
+        }
+        return FALSE;
     }
     public function preprocessorGPA(){
         $listbd = $this->db->selectALot("SELECT mahs,mahk,namhoc FROM bangdiem GROUP BY mahs");
@@ -40,10 +71,12 @@ class mark{
             $mahs = $value['mahs'];
             $mahk = $value['mahk'];
             $namhoc = $value['namhoc'];
-            if($this->countbd($mahs,$mahk,$namhoc)[0] == 10){
+            if($this->countbd($mahs,$mahk,$namhoc)[0] == 10 AND $this->checkZeroMark($mahs,$mahk,$namhoc)==FALSE){
                 $sql1 = "SELECT AVG(bd.diemtb) FROM hocsinh AS hs, bangdiem AS bd WHERE hs.mahs = bd.mahs AND hs.mahs = '$mahs' AND bd.mahk = '$mahk' AND bd.namhoc = '$namhoc'";
                 $diemtk = $this->db->selectOne($sql1)[0];
             }
+            else if($this->checkZeroMark($mahs,$mahk,$namhoc)==TRUE )
+                $diemtk = 0;
             else
                 $diemtk = 0;
             $xeploai = $this->classify($diemtk);
@@ -64,6 +97,11 @@ class mark{
     }
     public function getListSubject(){
         $sql = "SELECT * FROM monhoc";
+        $result = $this->db->selectALot($sql);
+        return $result;
+    }
+    public function getListStudent(){
+        $sql = "SELECT * FROM hocsinh";
         $result = $this->db->selectALot($sql);
         return $result;
     }

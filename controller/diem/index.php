@@ -22,7 +22,7 @@ switch ($action) {
                     $diem1tiet = $_POST['diem1tiet'];
                     $diemhk = $_POST['diemhk'];
                     if($diem->authentication($ss->get('username'),$malop,$mamh)){
-                        if($diem->insertMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
+                        if($diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
                             header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
                             echo "<script>alert('Thêm Thành Công!')</script>";
                         }

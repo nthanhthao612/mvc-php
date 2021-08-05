@@ -8,9 +8,12 @@
     include 'model/mark.php';
     include 'model/teacher.php'; 
     include 'model/user.php';
-    error_reporting(0);  
+    
+    // error_reporting(0);  
 ?>
 <?php
+$diem = new mark();
+$diem->initialize();
 function printAlertLogin(){
     echo '<script type="text/javascript">
  
@@ -66,7 +69,7 @@ function printAlertHaveNoPermit(){
         case 'diem':{
             $hocsinh = new student();
             $lop = new schoolclass();
-            $diem = new mark();
+            
             $diem->preprocessorAVE();
             $diem->preprocessorGPA();
             require_once('public/layout/layout.php');

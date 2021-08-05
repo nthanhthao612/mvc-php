@@ -5,12 +5,6 @@
 
 <body>
   <div id="main-body">
-    <!-- <?php
-      if($ss->checkLogin()==TRUE){
-        echo '<a href="index.php?controller=diem&action=add-list" class="btn btn-primary">Thêm với file Excel</a>';
-      }
-    ?> -->
-    <a href='index.php?controller=diem&action=statistic' class='btn btn-primary'>Xem thông kê</a>
     <div id="main-function">
       <div>
         <div id="filter-box" class="search-form">
