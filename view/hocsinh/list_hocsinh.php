@@ -1,11 +1,12 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Danh sách</title>
 </head>
 
 <body>
   <div id="main-body">
     <div id="main-function">
+    
       <?php
         $malop = '';
         if(isset($_GET['malop']))
@@ -13,7 +14,8 @@
           $malop = $_GET['malop'];
         }
         if($ss->checkLogin()){
-          echo "<a href='index.php?controller=hoc-sinh&action=add&malop='".$malop." class='btn btn-primary'>Thêm</a>";
+          echo "<a href='index.php?controller=hoc-sinh&action=add&malop=".$malop."' class='btn btn-primary'><i class='fas fa-plus'></i>&nbsp;&nbsp;Thêm</a>&nbsp;&nbsp;";
+          echo "<a href='index.php?controller=hoc-sinh&action=add-list&malop=".$malop."' class='btn btn-primary'><i class='fas fa-plus-circle'></i>&nbsp;&nbspThêm với file Excel</a>&nbsp;&nbsp;";
         }
       ?>
       <div>
@@ -32,7 +34,7 @@
                 <option value="A">Tự Nhiên</option>
                 <option value="D">Xã Hội</option>
               </select>
-              <input type="submit" value="lọc" class="btn btn-primary">
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
         <div id="search-box" class="search-form">
@@ -40,7 +42,7 @@
             <input type="hidden" name="controller" value="hoc-sinh">
             <input type="hidden" name="action" value="search">
             <input name="search-value">
-            <button class="btn btn-primary" type='submit'">Search</button>
+            <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>
       </div>
@@ -72,7 +74,7 @@
               <th scope="row"><?php echo $value['malop'];?> </th>
               <td>
                   <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Xem</a>
-                  <a href="index.php?controller=hoc-sinh&action=edit&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Sửa</a>
+                  <!-- <a href="index.php?controller=hoc-sinh&action=edit&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Sửa</a> -->
                   <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Xóa</a>
               </td>
             </tr>

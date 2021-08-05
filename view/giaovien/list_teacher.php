@@ -26,7 +26,7 @@
                 <option value="T">Tự chọn</option>
                 <option value="">-None-</option>
               </select>
-              <input type="submit" value="lọc" class="btn btn-primary">
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
         <div id="search-box" class="search-form">
@@ -34,7 +34,7 @@
             <input type="hidden" name="controller" value="giao-vien">
             <input type="hidden" name="action" value="search">
             <input name="search-value">
-            <button class="btn btn-primary" type='submit'">Search</button>
+            <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>
       </div>

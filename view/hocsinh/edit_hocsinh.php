@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Sửa thông tin</title>
 </head>
 <body>
   <div id="main-body">
@@ -10,6 +10,10 @@
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Mã học sinh</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="mahs" value="<?php echo $data['mahs'];?>" readonly>
+          </div>
+          <div class="mb-3 ">
+            <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
           </div>
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Họ và tên đệm</label>
@@ -24,16 +28,21 @@
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="malop" value="<?php echo $data['malop'];?>">
           </div>
           <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">Giới tính</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="gioitinh" value="<?php echo $data['gioitinh'];?>">
+          <label for="formGroupExampleInput2" class="form-label">Giới tính</label>
+            <br>
+            <input type="radio" name="gioitinh" id="male" value="1">
+            <label for="male">Nam</label>
+            <br>
+            <input type="radio" name="gioitinh" id="female" value="0">
+            <label for="female">Nữ</label>
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Năm vào học</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="gioitinh" value="<?php echo $data['nam'];?>" readonly>
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="nam" value="<?php echo $data['nam'];?>" readonly>
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Ngày sinh</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput4" name="ngaysinh" value="<?php echo $data['ngaysinh'];?>">
+            <input type="date" class="form-control info-input-txb" id="formGroupExampleInput4" name="ngaysinh" value="<?php echo $data['ngaysinh'];?>">
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Địa chỉ</label>

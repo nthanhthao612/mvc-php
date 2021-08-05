@@ -1,38 +1,42 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Thông tin</title>
 </head>
 
 <body>
   <div id="main-body">
     <div id="main-function">
       <a href="index.php?controller=hoc-sinh&action=edit&mahs=<?php echo $data['mahs'];?>" class="btn btn-primary">Sửa</a>
-      <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $data['mahs'];?>&malop=<?php echo $data['malop'];?>" class="btn btn-primary">Xóa</a>
+      <!-- <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $data['mahs'];?>&malop=<?php echo $data['malop'];?>" class="btn btn-primary">Xóa</a> -->
     </div>
     <div id="main-content">
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">Mã học sinh</th>
-            <th scope="col">Họ và tên đệm</th>
-            <th scope="col">Tên</th>
+            <th scope="col"><h2>Họ và tên</h2></th>
+            <th scope="row"><h2><?php echo $data['hotendem'].' '.$data['ten'];?></h2></th>
+          </tr>
+          <tr>
+            <th scope="col"><h3>Mã học sinh</h3></th>
+            <th scope="row"><h3><?php echo $data['mahs'];?></h3></th>
+          </tr>
+          <tr>
             <th scope="col">Lớp</th>
+            <th scope="row"><?php echo $data['malop'];?></th>
+          </tr>
+          <tr>
             <th scope="col">Giới tính</th>
+            <th scope="row"><?php echo $data['gioitinh'];?></th>
+          </tr>
+          <tr>
             <th scope="col">Ngày sinh</th>
+            <th scope="row"><?php echo $data['ngaysinh'];?></th>
+          </tr>
+          <tr>
             <th scope="col">Địa chỉ</th>
+            <th scope="row"><?php echo $data['diachi'];?></th>
           </tr>
         </thead>
-        <tbody>
-            <tr>
-              <th scope="row"><?php echo $data['mahs'];?></th>
-              <td><?php echo $data['hotendem']; ?></td>
-              <td><?php echo $data['ten']; ?></td>
-              <td><?php echo $data['malop']; ?></td>
-              <td><?php echo $data['gioitinh']; ?></td>
-              <td><?php echo $data['ngaysinh']; ?></td>
-              <td><?php echo $data['diachi']; ?></td>
-            </tr>
-        </tbody>
       </table>
     </div>
   </div>

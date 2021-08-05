@@ -13,6 +13,11 @@
     <h4>Sĩ số: <?php echo $lop->countFigure($_GET['malop'])[0];?></h4>
     <br>
     <h4>Giáo viên bộ môn</h4>
+    <?php
+      if($ss->get('username')=='admin'){
+        echo '<a href="index.php?controller=lop&action=add-subteacher&malop='.$_GET['malop'].'" class="btn btn-primary">Thêm giáo viên bộ môn</a>';
+      }
+    ?>
       <table class="table">
         <thead>
           <tr>
@@ -34,6 +39,7 @@
               <th scope="row"><?php echo $value['tenmh'];?></th>
               <th scope="row"><?php echo $value['hotendemgv']. " ".$value['tengv'];?></th>
               <td>
+                  <a href="index.php?controller=lop&action=edit-subteacher&malop=<?php echo $value['malop'];?>&magv=<?php echo $value['magv'];?>" class="btn btn-primary">Sửa</a>
                   <a href="index.php?controller=giao-vien&action=info&magv=<?php echo $value['magv'];?>" class="btn btn-primary">Thông tin</a>
               </td>
             </tr>

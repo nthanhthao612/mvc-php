@@ -1,10 +1,13 @@
 <html>
 <head>
-  <title>Tìm kiếm</title>
+  <title>Thống kê chi tiết</title>
 </head>
-
 <body>
   <div id="main-body">
+    <h1>Lớp: <?php echo $data[0]['malop'];?></h1>
+    <h2>Năm học: <?php echo $data[0]['namhoc'];?></h2>
+    <h2>Học kì: <?php echo $data[0]['mahk'];?></h2>
+    <br>
     <div id="main-function">
       
       <?php
@@ -21,6 +24,7 @@
               <input type="hidden" name="action" value="filter-detail">
               <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
               <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
+              <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
               <label for="mahk">Chọn xếp loại</label>
               <select name="xeploai" id="xeploai">
                 <option value="Giỏi">Giỏi</option>
@@ -28,7 +32,7 @@
                 <option value="Trung Bình">Trung Bình</option>
                 <option value="Chưa xếp loại">Chưa xếp loại</option>
               </select>
-              <input type="submit" value="lọc" class="btn btn-primary">
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
         <div id="search-box" class="search-form">
@@ -38,8 +42,9 @@
             <input type="hidden" name="action" value="search-detail">
             <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
             <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
+            <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
             <input name="search-value">
-            <button class="btn btn-primary" type='submit'">Search</button>
+            <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>
       </div>
@@ -72,8 +77,8 @@
               <th scope="row"><?php echo $value['malop']; ?> </th>
               <th scope="row"><?php echo $value['xeploai'];?></th>
               <td>
-              <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $_GET['mahk'];?>" class="btn btn-primary">Xem chi tiết điểm</a>
-                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Thông tin</a>
+                <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $_GET['mahk'];?>&malop=<?php echo $_GET['malop'];?>&namhoc=<?php echo $_GET['namhoc'];?>" class="btn btn-primary">Xem chi tiết điểm</a>
+                <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Thông tin</a>
               </td>
             </tr>
             <?php

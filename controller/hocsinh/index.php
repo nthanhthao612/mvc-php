@@ -8,45 +8,54 @@ if (isset($_GET['action'])) {
 switch ($action) {
     case 'add-list':
         {
-            if(isset($_POST['add-list-student'])){
-                $data = array();
-                if(isset($_FILES['excel']['name'])){
-                        $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
-                        $data = $excel->rows();
-                }
-                for($i = 1;$i<count($data);$i++){
-                    $temp = $data[$i];
-                        $malop = $temp[0];
-                        $hotendem = $temp[1];
-                        $ten = $temp[2];
-                        $gioitinh = $temp[3];
-                        $nam = $temp[4];
-                        $ngaysinh = $temp[5];
-                        $diachi = $temp[6];
-                        $mahs = $hocsinh->setID($malop,$nam);
-                        if($hocsinh->getInfoStudent($mahs)[0]==0){
-                            $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
+            if($ss->checkLogin() == True AND $ss->get('privilege')== 'gv'){
+                if($hocsinh->authenticateTeacherPermit($ss->get('username'),$_GET['malop'])){
+                    if(isset($_POST['add-list-student'])){
+                        $data = array();
+                        if(isset($_FILES['excel']['name'])){
+                                $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
+                                $data = $excel->rows();
                         }
+                        for($i = 1;$i<count($data);$i++){
+                            $temp = $data[$i];
+                                $malop = $temp[0];
+                                $hotendem = $temp[1];
+                                $ten = $temp[2];
+                                $temp[3] == "Nam"? $gioitinh = "Nam" : $gioitinh = "Nữ";
+                                $nam = $temp[4];
+                                $ngaysinh = $temp[5];
+                                $diachi = $temp[6];
+                                $mahs = $hocsinh->setID($malop,$nam);
+                                if($hocsinh->getInfoStudent($mahs)[0]==0){
+                                    $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
+                                    $taikhoan->insertIntoUser($mahs,'1',$mahs,'hs');
+                                }
+                        }
+                        header('location:index.php?controller=hoc-sinh&action=');
                     }
-                header('location:index.php?controller=hoc-sinh&action=');
+                    require_once 'view/hocsinh/addlist_hocsinh.php';
+                }
+                else
+                    printAlertHaveNoPermit(); 
             }
-            require_once 'view/hocsinh/addlist_hocsinh.php';
+            else
+                printAlertLogin();
             break;
         }
     case 'add':
         {
-            if($ss->checkLogin() == True){
+            if($ss->checkLogin() == True AND $ss->get('privilege')== 'gv'){
                 if(isset($_POST['add_hocsinh'])){
                     $hotendem = $_POST['hotendem'];
                     $ten = $_POST['ten'];
                     $malop = $_POST['malop'];
-                    $gioitinh = $_POST['gioitinh'];
+                    $_POST['gioitinh'] == 1? $gioitinh = "Nam" : $gioitinh = "Nữ";
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
                     $nam = $_POST['nam'];
                     $mahs = $hocsinh->setID($malop,$nam);
-                    if($hocsinh->authentication($ss->get('userID'),$malop)){
-                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi)){
+                    if($hocsinh->authenticateTeacherPermit($ss->get('username'),$malop)){
+                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,'1',$mahs,'hs')){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                             echo "<script>alert('Thành Công!')</script>";
                         }
@@ -58,14 +67,13 @@ switch ($action) {
                 require_once 'view/hocsinh/add_hocsinh.php';
             }
             else{
-                header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>"; 
+                printAlertLogin(); 
             }
             break;
         }
     case 'edit':
         {
-            if($ss->checkLogin() == True){
+            if($ss->checkLogin() == True AND $ss->get('username')==$_GET['mahs']){
                 if(isset($_GET['mahs'])){
                 $mahs = $_GET['mahs'];
                 $data = $hocsinh->getInfoStudent($mahs);
@@ -75,11 +83,12 @@ switch ($action) {
                     $hotendem = $_POST['hotendem'];
                     $ten = $_POST['ten'];
                     $malop = $_POST['malop'];
-                    $gioitinh = $_POST['gioitinh'];
+                    $_POST['gioitinh'] == 1 ? $gioitinh = "Nam" : $gioitinh = "Nữ";
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
-                    if($hocsinh->authentication($ss->get('userID'),$malop)){
-                        if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi)){
+                    $matkhau = $_POST['matkhau'];
+                    if($hocsinh->authenticateStudentPermit($ss->get('username')) AND ($ss->get('username') == $_GET['mahs'])){
+                        if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($mahs,$matkhau)){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                             echo "<script>alert('thanh cong')</script>";
                         }
@@ -88,12 +97,14 @@ switch ($action) {
                             echo "<script>alert('That bai')</script>";   
                         }
                     }
+                    else{
+                        printAlertHaveNoPermit();
+                    }
                 }
                 require_once 'view/hocsinh/edit_hocsinh.php';
             }
             else{
-                header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>"; 
+                printAlertLogin(); 
             }
             break;
         }
@@ -103,29 +114,32 @@ switch ($action) {
             if($ss->checkLogin() == True){
                 if(isset($_GET['mahs'])){
                     $mahs = $_GET['mahs'];
-                    if($hocsinh->authentication($ss->get('userID'),$malop)){
-                        if($hocsinh->deleteInfo($mahs)){
+                    if($hocsinh->authenticateTeacherPermit($ss->get('username'),$malop)){
+                        if($taikhoan->deleteUser($mahs) AND $hocsinh->deleteInfo($mahs)){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                            echo "<script>alert('thanh cong')</script>";
                         }
                         else{
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                            echo "<script>alert('That bai')</script>";
                         }
-                    } 
+                    }
+                    else
+                        printAlertHaveNoPermit();
                 }
             }
             else{
-                header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>";
+                printAlertLogin();
             }
             break;
         }
     case 'info':
         {
-            $mahs = $_GET['mahs'];
-            $data = $hocsinh->getInfoStudent($mahs);
-            require_once 'view/hocsinh/info_hocsinh.php';
+            if($ss->checkLogin()){
+                $mahs = $_GET['mahs'];
+                $data = $hocsinh->getInfoStudent($mahs);
+                require_once 'view/hocsinh/info_hocsinh.php';
+            }
+            else
+                printAlertLogin();
             break;
         }
     case 'list':

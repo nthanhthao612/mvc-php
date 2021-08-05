@@ -1,9 +1,15 @@
 <html>
 <head>
-  <title>Tìm kiếm</title>
+  <title>Thống kê</title>
 </head>
 <body>
   <div id="main-body">
+    <?php
+      if($ss->checkLogin()==TRUE){
+        echo '<a href="index.php?controller=diem&action=add-list" class="btn btn-primary">Thêm với file Excel</a>';
+      }
+    ?>
+    <a href='index.php?controller=diem&action=statistic' class='btn btn-primary'>Xem thông kê</a>
     <div id="main-function">
       <div>
         <div id="filter-box" class="search-form">
@@ -21,7 +27,9 @@
                 <option value="1">học kì 1</option>
                 <option value="2">học kì 2</option>
               </select>
-              <input type="submit" value="lọc" class="btn btn-primary">
+              <label for="nam">Năm học</label>
+              <input type="text" name="namhoc" >
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
         <div id="search-box" class="search-form">
@@ -29,7 +37,7 @@
             <input type="hidden" name="controller" value="diem">
             <input type="hidden" name="action" value="search">
             <input name="search-value">
-            <button class="btn btn-primary" type='submit'">Search</button>
+            <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>
       </div>
@@ -41,6 +49,7 @@
             <th scope="col">Khối</th>
             <th scope="col">Mã lớp</th>
             <th scope="col">Sĩ số</th>
+            <th scope="col">Năm học</th>
             <th scope="col">Học kì</th>
             <th scope="col">Giỏi</th>
             <th scope="col">Khá</th>
@@ -62,13 +71,14 @@
                     <th scope="row"><?php echo $value['makhoi'];?></th>
                     <th scope="row"><?php echo $value['malop']; ?></th>
                     <th scope="row"><?php echo $lop->countFigure($value['malop'])[0]; ?></th>
+                    <th scope="row"><?php echo $value['namhoc']; ?></th>
                     <th scope="row"><?php echo $value['mahk']; ?></th>
                     <th scope="row"><?php echo $diem->countClassify($value['malop'],$value['mahk'],'Giỏi')[0];?></th>
                     <th scope="row"><?php echo $diem->countClassify($value['malop'],$value['mahk'],'Khá')[0];?></th>
                     <th scope="row"><?php echo $diem->countClassify($value['malop'],$value['mahk'],'Trung bình')[0];?></th>
                     <th scope="row"><?php echo $diem->countClassify($value['malop'],$value['mahk'],'Chưa xếp loại')[0];?></th>
                     <td>
-                        <a href="index.php?controller=diem&action=list-detail&malop=<?php echo $value['malop'];?>&mahk=<?php echo $value['mahk'];?>" class="btn btn-primary">Xem danh sách</a>
+                        <a href="index.php?controller=diem&action=list-detail&malop=<?php echo $value['malop'];?>&mahk=<?php echo $value['mahk'];?>&namhoc=<?php echo $value['namhoc'];?>" class="btn btn-primary">Xem danh sách</a>
                     </td>
                   </tr>
               <?php

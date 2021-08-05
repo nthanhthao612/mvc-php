@@ -8,7 +8,7 @@ if (isset($_GET['action'])) {
 switch ($action) {
     case 'add':
         {
-            if($ss->checkLogin() == True){
+            if($ss->checkLogin() == True AND $ss->get('privilege')=='admin'){
                 if (isset($_POST['add_lop'])) {
                     $makhoi = $_POST['makhoi'];
                     $malop = $_POST['malop'];
@@ -27,14 +27,13 @@ switch ($action) {
                 require_once 'view/lop/add_lop.php';
             }
             else{
-                header('location: index.php?controller=lop&action=list');
-                echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>";
+                printAlertHaveNoPermit();
             }
             break;
         }
     case 'edit':
         {
-            if($ss->checkLogin() == True){
+            if($ss->checkLogin() == True AND $ss->get('privilege')=='admin'){
                 if(isset($_GET['malop'])){
                     $malop = $_GET['malop'];
                     $data = $lop->getInfoClass($malop);
@@ -55,10 +54,8 @@ switch ($action) {
                 require_once 'view/lop/edit_lop.php';
             }
             else{
-                header('location: index.php?controller=lop&action=list');
-                echo "<script type='text/javascript'>alert('Cần Đăng nhập để thực hiện thao tác');</script>";
+                printAlertHaveNoPermit();
             } 
-            
             break;
         }
     case 'list':
@@ -87,6 +84,45 @@ switch ($action) {
             $malop = $_GET['malop'];
             $data = $lop->listTeacher($malop);
             require_once 'view/lop/info_lop.php';
+            break;
+        }
+    case 'add-subteacher':{
+            if($ss->checkLogin()==TRUE AND $ss->get('username')=='admin'){
+                if(isset($_POST['add_subteacher'])){
+                    $malop = $_POST['malop'];
+                    $magv = $_POST['magv'];
+                    if($lop->checkTeacher($malop,$magv)==0){
+                        if($lop->insertSubTeacher($malop,$magv)){
+                            header("location: index.php?controller=lop&action=info&malop=$malop");
+                        }
+                    }
+                    else{
+                        if($lop->updateSubTeacher($malop,$magv)){
+                            header("location: index.php?controller=lop&action=info&malop=$malop");
+                        }
+                    }
+                }
+                require_once 'view/lop/add_bomon.php';
+            }   
+            else{
+                printAlertHaveNoPermit();
+            }
+            break;
+        }
+    case 'edit-subteacher':{
+            if($ss->checkLogin()==TRUE AND $ss->get('username')=='admin'){
+                if(isset($_POST['add_subteacher'])){
+                    $malop = $_POST['malop'];
+                    $magv = $_POST['magv'];
+                    if($lop->updateSubTeacher($malop,$magv)){
+                        header("location: index.php?controller=lop&action=info&malop=$malop");
+                    }
+                }
+                require_once 'view/lop/edit_bomon.php';
+            }   
+            else{
+                printAlertHaveNoPermit();
+            }
             break;
         }
     default:

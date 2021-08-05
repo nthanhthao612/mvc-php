@@ -1,13 +1,13 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Danh sách</title>
 </head>
 
 <body>
   <div id="main-body">
     <div id="main-function">
       <?php
-        if($user->checkLogin()){
+        if($ss->checkLogin()){
           echo "<a href='index.php?controller=hoc-sinh&action=add' class='btn btn-primary'>Thêm</a>";
         }
       ?>
@@ -27,15 +27,15 @@
                 <option value="A">Tự Nhiên</option>
                 <option value="D">Xã Hội</option>
               </select>
-              <input type="submit" value="lọc" class="btn btn-primary">
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
         <div id="search-box" class="search-form">
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="hoc-sinh">
             <input type="hidden" name="action" value="search">
-            <input name="search-value" value="<?php echo $_GET['search-value'];?>">
-            <button class="btn btn-primary" type="submit" >Search</button>
+            <input name="search-value" value="">
+            <button class="btn btn-primary" type="submit" ><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>
       </div>

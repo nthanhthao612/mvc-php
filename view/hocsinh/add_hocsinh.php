@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Thêm học sinh</title>
 </head>
 <body>
   <div id="main-body">
@@ -30,11 +30,16 @@
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Giới tính</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="gioitinh">
+            <br>
+            <input type="radio" name="gioitinh" id="male" value="1">
+            <label for="male">Nam</label>
+            <br>
+            <input type="radio" name="gioitinh" id="female" value="0">
+            <label for="female">Nữ</label>
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Ngày sinh</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput4" name="ngaysinh">
+            <input type="date" class="form-control info-input-txb" id="formGroupExampleInput4" name="ngaysinh">
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Địa chỉ</label>

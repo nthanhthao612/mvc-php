@@ -40,8 +40,23 @@ class schoolclass{
         return $result;
     }
     public function listTeacher($malop){
-        $sql = "SELECT gv.magv,gv.tengv,gv.hotendemgv,l.malop,gv.mamh,mh.tenmh,bd.mahk FROM giaovien AS gv,monhoc AS mh, bangdiem AS bd, lop AS l,hocsinh AS hs WHERE mh.mamh = gv.mamh AND hs.malop = '$malop' AND gv.magv = bd.magv AND hs.malop = l.malop AND bd.mahs = hs.mahs GROUP BY gv.magv";
+        $sql = "SELECT * FROM giaovien AS gv, monphutrach AS mpt, monhoc AS mh WHERE gv.mamh = mh.mamh AND mpt.magv = gv.magv AND mpt.malop = '$malop'";
         $result = $this->db->selectALot($sql);
+        return $result;
+    }
+    public function checkTeacher($malop,$magv){
+        $sql = "SELECT * FROM giaovien AS gv, monphutrach AS mpt, monhoc AS mh WHERE gv.mamh = mh.mamh AND mpt.magv = gv.magv AND mpt.malop = '$malop' AND mpt.magv = '$magv'";
+        $result = $this->db->selectOne($sql);
+        return $result;
+    }
+    public function insertSubTeacher($malop,$magv){
+        $sql = "INSERT INTO monphutrach(malop,magv) VALUES('$malop','$magv')";
+        $result = $this->db->insert($sql);
+        return $result;
+    }
+    public function updateSubTeacher($malop,$magv,$mamh){
+        $sql = "UPDATE monphutrach SET magv = '$magv' WHERE malop = '$malop'";
+        $result = $this->db->update($sql);
         return $result;
     }
 }

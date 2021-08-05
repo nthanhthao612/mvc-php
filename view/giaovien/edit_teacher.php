@@ -21,7 +21,7 @@
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" value="<?php echo $data['matkhau'];?>">
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mã môn</label>
@@ -32,12 +32,17 @@
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="namgv" value="<?php echo $data['namgv'];?>">
           </div>
           <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">Giới tính</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="gioitinh" value="<?php echo $data['gioitinh'];?>">
+          <label for="formGroupExampleInput2" class="form-label">Giới tính</label>
+            <br>
+            <input type="radio" name="gioitinh" id="male" value="1">
+            <label for="male">Nam</label>
+            <br>
+            <input type="radio" name="gioitinh" id="female" value="0">
+            <label for="female">Nữ</label>
           </div>
           <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">Ngày sinh</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput4" name="ngaysinh" value="<?php echo $data['ngaysinh'];?>">
+          <label for="formGroupExampleInput2" class="form-label">Ngày sinh</label>
+            <input type="date" class="form-control info-input-txb" id="formGroupExampleInput4" name="ngaysinh" value="<?php echo $data['ngaysinh'];?>">
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Địa chỉ</label>

@@ -8,9 +8,44 @@
     include 'model/mark.php';
     include 'model/teacher.php'; 
     include 'model/user.php';
-    // error_reporting(0);  
+    error_reporting(0);  
 ?>
+<?php
+function printAlertLogin(){
+    echo '<script type="text/javascript">
+ 
+            function testConfirmDialog()  {
 
+                var result = confirm("Cần đăng nhập để thực hiện thao tác? Bạn có Đồng ý không? ");
+
+                if(result)  {
+                    window.location.replace("http://localhost:8080/mvc-php/index.php?controller=login");
+                } else {
+                    window.history.back();
+                }
+            }
+
+           </script>';
+    echo '<script type="text/javascript">testConfirmDialog()</script>';
+}
+function printAlertHaveNoPermit(){
+    echo '<script type="text/javascript">
+ 
+            function testConfirmDialog()  {
+
+                var result = confirm("Bạn không có quyền thực hiện thao tác? Đăng nhập với tài khoản khác? ");
+
+                if(result)  {
+                    window.location.replace("http://localhost:8080/mvc-php/index.php?controller=login");
+                } else {
+                    window.history.back();
+                }
+            }
+
+           </script>';
+    echo '<script type="text/javascript">testConfirmDialog()</script>';
+}
+?>
 <?php
     $ss = new Session();
     $ss->init();

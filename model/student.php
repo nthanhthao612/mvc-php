@@ -66,10 +66,18 @@ class student{
                 return ((int)$nam * 1000000) + (44 * 10000) + 1;
         }
     }
-    public function authentication($magv,$malop){
+    public function authenticateTeacherPermit($magv,$malop){
         $sql = "SELECT * FROM lop WHERE malop = '$malop'";
         $temp = $this->db->selectALot($sql);
         if($temp[0]['magv'] == $magv)
+            return True;
+        else
+            return False;
+    }
+    public function authenticateStudentPermit($mahs){
+        $sql = "SELECT * FROM hocsinh WHERE mahs = '$mahs' limit 1";
+        $temp = $this->db->selectALot($sql);
+        if($temp[0]['mahs'] == $mahs)
             return True;
         else
             return False;
