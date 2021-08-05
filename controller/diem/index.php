@@ -166,6 +166,7 @@ switch ($action) {
                 $mahk = $_GET['mahk'];
                 $namhoc = $_GET['namhoc'];
                 $data = $diem->getDetailClassMark($malop,$mahk,$namhoc);
+                $subject = $diem->getListSubject();
             }
             require_once 'view/diem/list_diem_detail.php';
             break;
@@ -187,7 +188,9 @@ switch ($action) {
                 $namhoc = $_GET['namhoc'];
                 $searchValue = $_GET['search-value'];
                 $data = $diem->searchDetailClassMark($malop,$mahk,$namhoc,$searchValue);
+                $subject = $diem->getListSubject();
             }
+            
             require_once 'view/diem/search_diem_detail.php';
             break;
         }
@@ -210,25 +213,22 @@ switch ($action) {
                 $xeploai = $_GET['xeploai'];
                 $namhoc = $_GET['namhoc'];
                 $data = $diem->filterDetailClassMark($malop,$mahk,$xeploai,$namhoc);
+                $subject = $diem->getListSubject();
             }
+            
             require_once 'view/diem/search_diem_detail.php';
             break;
         }
-    case 'statistic':{
-        
-        if(isset($_GET['view-statistic-classify'])){
-            $makhoi = $_GET['makhoi'];
-            $namhoc = $_GET['namhoc'];
-            $mahk = $_GET['mahk'];
-            $data1 = $diem->viewStatistic($makhoi,$namhoc,$mahk);
-        }
-        if(isset($_GET['view-min-max'])){
-            $makhoi = $_GET['makhoi'];
-            $namhoc = $_GET['namhoc'];
-            $mahk = $_GET['mahk'];
-            $minmax = $_GET['minmax'];
-            $data2 = $diem->viewMinMax($makhoi,$namhoc,$mahk,$minmax);
-        }
+    case 'subject':{
+        if(isset($_GET['malop']) AND isset($_GET['mahk'])){
+                $malop = $_GET['malop'];
+                $mahk = $_GET['mahk'];
+                $namhoc = $_GET['namhoc'];
+                $mamh = $_GET['mamh'];
+                $data = $diem->getDetailClassMark($malop,$mahk,$namhoc);
+                $data1 = $diem->getMarkSubject($malop,$mahk,$namhoc,$mamh);
+                $subject = $diem->getListSubject();
+            }
         require_once 'view/diem/thongke.php';
         break;
     }

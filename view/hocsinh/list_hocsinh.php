@@ -12,10 +12,11 @@
         if(isset($_GET['malop']))
         {
           $malop = $_GET['malop'];
+          echo "<a href='index.php?controller=hoc-sinh&action=add-list&malop=".$malop."' class='btn btn-primary'><i class='fas fa-plus-circle'></i>&nbsp;&nbspThêm với file Excel</a>&nbsp;&nbsp;";
         }
         if($ss->checkLogin()){
           echo "<a href='index.php?controller=hoc-sinh&action=add&malop=".$malop."' class='btn btn-primary'><i class='fas fa-plus'></i>&nbsp;&nbsp;Thêm</a>&nbsp;&nbsp;";
-          echo "<a href='index.php?controller=hoc-sinh&action=add-list&malop=".$malop."' class='btn btn-primary'><i class='fas fa-plus-circle'></i>&nbsp;&nbspThêm với file Excel</a>&nbsp;&nbsp;";
+          
         }
       ?>
       <div>
@@ -41,7 +42,7 @@
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="hoc-sinh">
             <input type="hidden" name="action" value="search">
-            <input name="search-value">
+            <input type="text" class="txt-input" name="search-value">
             <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>

@@ -1,80 +1,121 @@
 <html>
 <head>
-  <title>Danh sách</title>
+  <title>Danh sách xếp loại theo lớp</title>
 </head>
 
 <body>
   <div id="main-body">
-    <div id="main-function">
-      <h2>Thống kê theo xếp loại</h2>
-      <form action="" method="get">
-        <input type="hidden" name="action" value="statistic">
-        <label for="makhoi">Khối</label>
-        <select name="makhoi" id="makhoi">
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="0">Tất cả</option>
-        </select>
-        &nbsp;
-        &nbsp;
-        <label for="namhoc">Năm học</label>
-        <input type="text" name="namhoc" id="namhoc">
-        &nbsp;
-        &nbsp;
-        <label for="mahk">Học kì</label>
-        <select name="mahk" id="mahk">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" name="view-statistic-classify" value="Thống kê" class='btn btn-primary'>
-      </form>
-      <h2>Lựa chọn</h2>
-      <form action="" method="get">
-        <input type="hidden" name="action" value="statistic">
-        <input type="hidden" name="action" value="statistic">
-        <label for="makhoi">Khối</label>
-        <select name="makhoi" id="makhoi">
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="0">Tất cả</option>
-        </select>
-        &nbsp;
-        &nbsp;
-        <label for="namhoc">Năm học</label>
-        <input type="text" name="namhoc" id="namhoc">
-        &nbsp;
-        &nbsp;
-        <label for="mahk">Học kì</label>
-        <select name="mahk" id="mahk">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
-        &nbsp;
-        &nbsp;
-        <input type="radio" name="minmax" id="minmax" value="min">
-        <label for="minmax">Điểm TB cao nhất</label>
-        <input type="radio" name="minmax" id="minmax" value="min">
-        <label for="minmax">Điểm TB thấp nhất</label>
-        &nbsp;
-        &nbsp;
-        <input type="submit" name="view-min-max" value="Tìm kiếm" class='btn btn-primary'>
-      </form>
-    </div>
+    <h1>Lớp: <?php echo $data[0]['malop'];?></h1>
+    <h2>Năm học: <?php echo $data[0]['namhoc'];?></h2>
+    <h2>Học kì: <?php echo $data[0]['mahk'];?></h2>
+    <h2>Môn học: <?php echo $data1[0]['tenmh'];?></h2>
+    <br>
     <?php
-      if(isset($data1) AND $data1[0] != 0){
-        echo "Xếp loại:      Số lượng";
-        foreach($data1 as $value){
-          echo $data1[0].'    '.$data1[2];
-        }
+      if($ss->checkLogin()==TRUE){
+        echo '<a href="index.php?controller=diem&action=add&malop='.$malop.'" class="btn btn-primary">Thêm</a>&emsp;';
+        echo '<a href="index.php?controller=diem&action=add-list&malop='.$malop.'" class="btn btn-primary">Thêm với file Excel</a>';
       }
     ?>
-  </div>
+    <br>
+    <div id="main-function">
+      <div>
+        <div id="filter-box" class="search-form">
+          <form action="" method="GET">
+              <br>
+              <input type="hidden" name="controller" value="diem">
+              <input type="hidden" name="action" value="filter-detail">
+              <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
+              <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
+              <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
+              <label for="mahk">Chọn xếp loại</label>
+              <select name="xeploai" id="xeploai">
+                <option value="Giỏi">Giỏi</option>
+                <option value="Khá">Khá</option>
+                <option value="Trung Bình">Trung Bình</option>
+                <option value="Chưa xếp loại">Chưa xếp loại</option>
+              </select>
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
+          </form>
+        </div>
+        <div id="subject" class="search-form">
+          <form action="" method="GET">
+              <br>
+              <input type="hidden" name="controller" value="diem">
+              <input type="hidden" name="action" value="subject">
+              <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
+              <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
+              <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
+              <label for="mahk">Chọn Môn</label>
+              <select name="mamh" id="mamh">
+              <?php
+                foreach($subject as $value){
+                  echo '<option value="'.$value['mamh'].'">'.$value['tenmh'].'</option>';
+                }
+              ?>
+              </select>
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
+          </form>
+        </div>
+        <div id="search-box" class="search-form">
+          <form action="" method="GET" >
+            <input type="hidden" name="controller" value="diem">
+            <input type="hidden" name="action" value="search-detail">
+            <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
+            <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
+            <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
+            <input type="text" class="txt-input" name="search-value">
+            <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
+          </form>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div id="main-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mã học sinh</th>
+            <th scope="col">Họ và tên đệm</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Điểm miệng</th>
+            <th scope="col">Điểm 15 phút</th>
+            <th scope="col">Điểm 1 tiết</th>
+            <th scope="col">Điểm học kì</th>
+            <th scope="col">Trung bình môn</th>
+            <th scope="col">Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php
+              if($data1[0] == 0){
+                echo '<tr><th scope="row">Không có dữ liệu hiện thị</th></tr>';
+              }
+              else{
+                foreach($data1 as $value)
+                {
+            ?>
+            <tr>
+              <th scope="row"><?php echo $value['mahs'];?> </th>
+              <th scope="row"><?php echo $value['hotendem']; ?> </th>
+              <th scope="row"><?php echo $value['ten']; ?> </th>
+              <th scope="row"><?php echo $value['diemmieng'];?></th>
+              <th scope="row"><?php echo $value['diem15p'];?></th>
+              <th scope="row"><?php echo $value['diem1tiet'];?></th>
+              <th scope="row"><?php echo $value['diemhk'];?></th>
+              <th scope="row"><?php echo $value['diemtb'];?></th>
+              <td>
+                  <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $_GET['mahk'];?>&malop=<?php echo $_GET['malop'];?>&namhoc=<?php echo $_GET['namhoc'];?>" class="btn btn-primary">Xem chi tiết điểm</a>
+                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Thông tin</a>
+              </td>
+            </tr>
+            <?php
+                  }
+                }
+              ?>
+        </tbody>
+      </table>
+    </div>
+  </div> 
 </body>
+
 </html>

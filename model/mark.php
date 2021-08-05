@@ -19,6 +19,7 @@ class mark{
         else
             return "Trung Bình";
     }
+    
     public function countbd($mahs,$mahk,$namhoc){
         $sql = "SELECT COUNT(*) AS count FROM bangdiem WHERE mahs = '$mahs' AND mahk = '$mahk' AND namhoc = '$namhoc'";
         $result = $this->db->selectOne($sql);
@@ -58,6 +59,11 @@ class mark{
     }
     public function getClassMark(){
         $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE hs.mahs = tk.mahs AND l.malop = hs.malop AND hs.mahs = bd.mahs GROUP BY l.malop ORDER BY l.malop ASC";
+        $result = $this->db->selectALot($sql);
+        return $result;
+    }
+    public function getListSubject(){
+        $sql = "SELECT * FROM monhoc";
         $result = $this->db->selectALot($sql);
         return $result;
     }
@@ -133,9 +139,9 @@ class mark{
             return TRUE;
         return FALSE;
     }
-    public function viewStatistic($makhoi,$namhoc,$mahk){
-        $sql = "SELECT tk.xeploai,COUNT(*) FROM tongket AS tk, hocsinh AS hs, lop AS l WHERE l.makhoi = '$makhoi' AND tk.namhoc = '$namhoc' AND tk.mahk = '$mahk' AND tk.mahs = hs.mahs AND hs.malop = l.malop GROUP BY tk.xeploai";
-        $result = $this->db->selectAlot($sql);
+    public function getMarkSubject($malop,$mahk,$namhoc,$mamh){
+        $sql = "SELECT * FROM bangdiem AS bd, hocsinh AS hs, monhoc AS mh WHERE mh.mamh = bd.mamh AND hs.mahs = bd.mahs AND hs.malop = '$malop' AND bd.mahk = '$mahk' AND bd.namhoc = '$namhoc' AND bd.mamh = '$mamh' ORDER BY hs.ten ASC";
+        $result = $this->db->selectALot($sql);
         return $result;
     }
 }   

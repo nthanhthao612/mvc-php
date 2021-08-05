@@ -1,5 +1,8 @@
 *{
-    /* background-color: rgb(234, 234, 234); */
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+    box-sizing: border-box;
 }
 .login-btn-area{
     right: 50px;
@@ -7,11 +10,10 @@
 
 #nav{
     top:0;
-    overflow: hidden;
     width: 100%;
     position:fixed;
     height: 10%;
-    background-color: rgb(182, 188, 179);
+    background-color: rgb(214, 225, 255);
 }
 .nav-bar-btn{
     display: inline;
@@ -45,7 +47,9 @@
     height: 100%;
     display: none;
     float: left;
-    background-color: rgb(234, 234, 234);
+    background-color: rgb(226, 234, 255);
+    
+    
 }
 .left-menu-btn{
     text-align: left; 
@@ -74,13 +78,20 @@
     /* display: none; */
     float: right;
     width: 86%;
-    height: 100%;
     left: 14%;
     position: absolute;
     top: 68px;
-    background-color: rgb(244, 244, 244);
 }
 
+.txt-input{
+    text-align: center;
+    border-radius: 13px;
+}
+select{
+    border-radius: 5px;
+    width: 130px;
+    text-align: center;
+}
 /* ------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------ */
@@ -106,12 +117,6 @@
     width: 400px;
 }
 
-/* 
-#mahs-id{
-    display: none;
-} */
-
-
 
 #search-box{
     float: right;
@@ -122,3 +127,19 @@
 .text-point{
     width: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,7 +29,7 @@
                 <option value="2">học kì 2</option>
               </select>
               <label for="nam">Năm học</label>
-              <input type="text" name="namhoc" >
+              <input type="text" class="txt-input" name="namhoc" >
               <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
@@ -37,7 +37,7 @@
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="diem">
             <input type="hidden" name="action" value="search">
-            <input name="search-value">
+            <input type="text" class="txt-input" name="search-value">
             <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>

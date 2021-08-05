@@ -87,6 +87,7 @@ function printAlertHaveNoPermit(){
         }   
         case 'login':{
             include_once('view/login/login.php');
+            require_once('public/layout/layout.php');
             break;
         }
         case 'logout':{
@@ -95,6 +96,9 @@ function printAlertHaveNoPermit(){
             break;
         }
         default:{
+            if($ss->checkLogin()==FALSE){
+                include_once('view/login/login.php');
+            }   
             require_once('public/layout/layout.php');
             break;
         }
@@ -109,6 +113,8 @@ function printAlertHaveNoPermit(){
     <link rel="stylesheet" href="public/css/bootstrap.css">
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/button.css">
+    <!-- <link href="public/css/login.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="public/js/jquery-3.6.0.min.js"></script>
     <script src="public/js/xuly.js"></script>

@@ -36,6 +36,25 @@
               <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
+        <div id="subject" class="search-form">
+          <form action="" method="GET">
+              <br>
+              <input type="hidden" name="controller" value="diem">
+              <input type="hidden" name="action" value="subject">
+              <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
+              <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
+              <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
+              <label for="mahk">Chọn Môn</label>
+              <select name="mamh" id="mamh">
+              <?php
+                foreach($subject as $value){
+                  echo '<option value="'.$value['mamh'].'">'.$value['tenmh'].'</option>';
+                }
+              ?>
+              </select>
+              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
+          </form>
+        </div>
         <div id="search-box" class="search-form">
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="diem">
@@ -43,7 +62,7 @@
             <input type="hidden" name="malop" value="<?php echo $_GET['malop'];?>">
             <input type="hidden" name="mahk" value="<?php echo $_GET['mahk'];?>">
             <input type="hidden" name="namhoc" value="<?php echo $_GET['namhoc'];?>">
-            <input name="search-value">
+            <input type="text" class="txt-input" name="search-value">
             <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
           <br>

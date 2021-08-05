@@ -36,7 +36,7 @@
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="diem">
             <input type="hidden" name="action" value="search">
-            <input name="search-value">
+            <input type="text" class="txt-input" name="search-value">
             <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>

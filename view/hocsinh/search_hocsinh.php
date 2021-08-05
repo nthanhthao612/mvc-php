@@ -34,7 +34,7 @@
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="hoc-sinh">
             <input type="hidden" name="action" value="search">
-            <input name="search-value" value="">
+            <input type="text" class="txt-input" name="search-value" value="">
             <button class="btn btn-primary" type="submit" ><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>

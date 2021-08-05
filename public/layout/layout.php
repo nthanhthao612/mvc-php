@@ -5,7 +5,7 @@
 <body>
     <nav id="nav">
         <div class="nav-bar-btn" id="menu-btn">
-            <button type="button" class="btn btn-primary" id="btn-menu-display" class="nav-bar-btn"><i class="fas fa-bars"></i></button>
+            <button type="button" class="btn btn-primary" id="btn-menu-display" class="nav-bar-btn"><i class="fas fa-bars">&nbsp;&nbsp;Menu</i></button>
         </div>
         <div class="nav-bar-btn" id="banner">
             <a class="navbar-brand" href="#">Quản lý điểm học sinh</a>
@@ -14,11 +14,11 @@
             <?php
                 if($ss->checkLogin()== True){
                     $temp = $taikhoan->getInfoUser($ss->get('username'),$ss->get('privilege'));
-                    echo "<span><b>Xin chào! ".$temp[2].'    '.$temp[0]."</b></span>";
-                    echo '<span><a href="index.php?controller=logout" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a></span>';
+                    echo "<span><b>Xin chào! ".$temp[2].'    '.$temp[0]."</b></span>&nbsp;&nbsp;&nbsp;&nbsp;";
+                    echo '<span><a href="index.php?controller=logout" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout&nbsp;&nbsp;</a></span>';
                 }
                 else{
-                    echo '<a href="index.php?controller=login" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</a>';
+                    echo '<a href="index.php?controller=login" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login&nbsp;&nbsp;</a>';
                 }
                 
             ?>

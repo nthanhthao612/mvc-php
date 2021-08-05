@@ -18,7 +18,7 @@
               <input type="hidden" name="controller" value="giao-vien">
               <input type="hidden" name="action" value="filter">
               <label for="makhoi">Năm vào</label>
-              <input type="text" name="namgv" id="namgv">
+              <input type="text" class="txt-input" name="namgv" id="namgv">
               <label for="manm">Chọn Nhóm môn</label>
               <select name="manm" id="manm">
                 <option value="A">Tự Nhiên</option>
@@ -26,14 +26,14 @@
                 <option value="T">Tự chọn</option>
                 <option value="">-None-</option>
               </select>
-              <button class="btn btn-primary" type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
+              <button type='submit' class="btn btn-primary"><i class='fas fa-filter'></i>&nbsp;&nbsp;Lọc</button>
           </form>
         </div>
         <div id="search-box" class="search-form">
           <form action="" method="GET" >
             <input type="hidden" name="controller" value="giao-vien">
             <input type="hidden" name="action" value="search">
-            <input name="search-value">
+            <input type="text" class="txt-input" name="search-value">
             <button class="btn btn-primary" type='submit'"><i class="fas fa-search"></i>&nbsp;&nbsp;Tìm kiếm</button>
           </form>
         </div>
