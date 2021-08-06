@@ -7,7 +7,11 @@
   <div id="main-body">
     <div id="main-function">
       <a href="index.php?controller=giao-vien&action=edit&magv=<?php echo $data['magv'];?>" class="btn btn-primary">Sửa</a>
-      <a href="index.php?controller=giao-vien&action=delete&magv=<?php echo $data['magv'];?>" class="btn btn-primary">Xóa</a>
+      <?php
+        if($ss->get('privilege')=='admin'){
+          echo '<a href="index.php?controller=giao-vien&action=delete&magv=<?php echo '.$data['magv'].';?>" class="btn btn-primary">Xóa</a>';
+        }
+      ?>
     </div>
     <div id="main-content">
     <table class="table">

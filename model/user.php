@@ -32,7 +32,7 @@ class user{
     }
     public function loginCheck($tentk,$matkhau){
         $tentk = $this->fm->validation($tentk);
-        $matkhau = $this->fm->validation($matkhau);
+        $matkhau = $this->fm->validation(md5($matkhau));
         $tentk = mysqli_real_escape_string($this->db->conn,$tentk);
         $matkhau = mysqli_real_escape_string($this->db->conn,$matkhau);
         if(empty($tentk) || empty($matkhau)){

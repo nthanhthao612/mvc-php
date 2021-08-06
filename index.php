@@ -8,12 +8,11 @@
     include 'model/mark.php';
     include 'model/teacher.php'; 
     include 'model/user.php';
-    
-    // error_reporting(0);  
+    error_reporting(0);  
 ?>
 <?php
 $diem = new mark();
-$diem->initialize();
+// $diem->initialize();
 function printAlertLogin(){
     echo '<script type="text/javascript">
  
@@ -30,6 +29,9 @@ function printAlertLogin(){
 
            </script>';
     echo '<script type="text/javascript">testConfirmDialog()</script>';
+}
+function printBackJSfunction(){
+    echo '<script>window.history.back();</script>';
 }
 function printAlertHaveNoPermit(){
     echo '<script type="text/javascript">
@@ -69,7 +71,6 @@ function printAlertHaveNoPermit(){
         case 'diem':{
             $hocsinh = new student();
             $lop = new schoolclass();
-            
             $diem->preprocessorAVE();
             $diem->preprocessorGPA();
             require_once('public/layout/layout.php');
@@ -99,9 +100,22 @@ function printAlertHaveNoPermit(){
             break;
         }
         default:{
+            $hocsinh = new student();
+            $giaovien = new teacher();
             if($ss->checkLogin()==FALSE){
                 include_once('view/login/login.php');
-            }   
+            }
+            if($ss->get('privilege')!='admin'){
+                if($ss->get('privilege')=='hs'){
+                    $data = $hocsinh->getInfoStudent($ss->get('username'));
+                    require_once 'view/hocsinh/info_hocsinh.php';
+                }
+                if($ss->get('privilege')=='gv'){
+                    $data = $giaovien->getInfoTeacher($ss->get('username'));
+                    require_once 'view/giaovien/info_teacher.php';
+                }
+
+            }
             require_once('public/layout/layout.php');
             break;
         }

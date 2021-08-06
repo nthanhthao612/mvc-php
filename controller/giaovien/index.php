@@ -20,7 +20,7 @@ switch ($action) {
                     $magv = $giaovien->setID($mamh,$namgv);
                     $tentk = $magv;
                     if($ss->get('username')=='admin' AND $ss->get('privilege')=='admin'){
-                        if($giaovien->insertIntoTeacher($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($tentk,'1',$magv,'gv')){
+                        if($giaovien->insertIntoTeacher($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($tentk,md5('2'),$magv,'gv')){
                             header('location: index.php?controller=giao-vien&action=list');
                             echo "<script>alert('Thành Công!')</script>";
                         }
@@ -48,7 +48,7 @@ switch ($action) {
                     $tengv = $_POST['tengv'];
                     $mamh = $_POST['mamh'];
                     $namgv = $_POST['namgv'];
-                    $matkhau = $_POST['matkhau'];
+                    $matkhau = md5($_POST['matkhau']);
                     $_POST['gioitinh'] == 1? $gioitinh = "Nam" : $gioitinh = "Nữ";
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];

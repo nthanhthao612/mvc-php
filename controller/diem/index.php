@@ -98,11 +98,9 @@ switch ($action) {
                     $diemhk = $_POST['diemhk'];
                     if($diem->authentication($ss->get('username'),$_GET['malop'],$mamh)){
                         if($diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
-                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
-                            echo "<script>alert('Sửa Thành Công!')</script>"; 
+                            header("location: index.php?controller=diem&action=subject&malop=$malop&mahk=$mahk&namhoc=$namhoc&mamh=$mamh");
                         }
                         else{
-                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
                             echo "<script>alert('Sửa Thất bại!')</script>";
                         }
                     }

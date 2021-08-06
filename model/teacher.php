@@ -5,7 +5,7 @@ class teacher{
         $this->db = new Database();
     }
     public function getListTeacher(){
-        $sql = "SELECT * FROM taikhoan AS us, giaovien AS gv, monhoc AS mh WHERE us.magv = gv.magv AND mh.mamh = gv.mamh ORDER BY gv.tengv ASC";
+        $sql = "SELECT * FROM giaovien AS gv, monhoc AS mh WHERE mh.mamh = gv.mamh ORDER BY gv.tengv ASC";
         $result = $this->db->selectALot($sql);
         return $result;
     }

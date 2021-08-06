@@ -15,10 +15,9 @@ switch ($action) {
                     $magv = $_POST['magv'];
                     $manm = $_POST['manm'];
                     if($ss->get('username')=='admin'){
-                        if($lop->insertClass($makhoi,$malop,$magv,$manm))
-                        {
+                        if($lop->insertClass($makhoi,$malop,$magv,$manm)){
+                            $lop->initialize($malop);
                             header('location: index.php?controller=lop&action=list');
-                            echo "<script type='text/javascript'>alert('thanh cong');</script>";
                         }
                         else
                            echo "<script>alert('That bai')</script>";
@@ -86,35 +85,14 @@ switch ($action) {
             require_once 'view/lop/info_lop.php';
             break;
         }
-    case 'add-subteacher':{
-            if($ss->checkLogin()==TRUE AND $ss->get('username')=='admin'){
-                if(isset($_POST['add_subteacher'])){
-                    $malop = $_POST['malop'];
-                    $magv = $_POST['magv'];
-                    if($lop->checkTeacher($malop,$magv)==0){
-                        if($lop->insertSubTeacher($malop,$magv)){
-                            header("location: index.php?controller=lop&action=info&malop=$malop");
-                        }
-                    }
-                    else{
-                        if($lop->updateSubTeacher($malop,$magv)){
-                            header("location: index.php?controller=lop&action=info&malop=$malop");
-                        }
-                    }
-                }
-                require_once 'view/lop/add_bomon.php';
-            }   
-            else{
-                printAlertHaveNoPermit();
-            }
-            break;
-        }
+
     case 'edit-subteacher':{
             if($ss->checkLogin()==TRUE AND $ss->get('username')=='admin'){
-                if(isset($_POST['add_subteacher'])){
+                if(isset($_POST['edit_subteacher'])){
                     $malop = $_POST['malop'];
                     $magv = $_POST['magv'];
-                    if($lop->updateSubTeacher($malop,$magv)){
+                    $mamh = $_POST['mamh'];
+                    if($lop->updateSubTeacher($malop,$magv,$mamh)){
                         header("location: index.php?controller=lop&action=info&malop=$malop");
                     }
                 }

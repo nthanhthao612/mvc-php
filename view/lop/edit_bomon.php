@@ -17,6 +17,10 @@
             <label for="formGroupExampleInput2" class="form-label">Mã giáo viên</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="magv" value="<?php echo $_GET['magv'];?>">
           </div>
+          <div class="mb-3 ">
+            <label for="formGroupExampleInput2" class="form-label">Mã môn</label>
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="mamh" value="<?php echo $_GET['mamh'];?>" readonly>
+          </div>
           <button type="submit" class="btn btn-outline-primary" name="edit_subteacher">submit</button>
         </form>
     </div>

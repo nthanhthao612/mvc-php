@@ -104,8 +104,8 @@
               <th scope="row"><?php echo $value['diemhk'];?></th>
               <th scope="row"><?php echo $value['diemtb'];?></th>
               <td>
-                  <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $_GET['mahk'];?>&malop=<?php echo $_GET['malop'];?>&namhoc=<?php echo $_GET['namhoc'];?>" class="btn btn-primary">Xem chi tiết điểm</a>
-                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Thông tin</a>
+              <a href="index.php?controller=diem&action=edit&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>&malop=<?php echo $value['malop'];?>&namhoc=<?php echo $value['namhoc'];?>" class="btn btn-primary">Sửa</a>
+                    <a href="index.php?controller=diem&action=delete&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>&malop=<?php echo $value['malop'];?>&namhoc=<?php echo $value['namhoc'];?>" class="btn btn-primary">Xóa</a>
               </td>
             </tr>
             <?php

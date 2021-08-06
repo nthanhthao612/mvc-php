@@ -28,7 +28,7 @@ switch ($action) {
                                 $mahs = $hocsinh->setID($malop,$nam);
                                 if($hocsinh->getInfoStudent($mahs)[0]==0){
                                     $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
-                                    $taikhoan->insertIntoUser($mahs,'1',$mahs,'hs');
+                                    $taikhoan->insertIntoUser($mahs,md5('1'),$mahs,'hs');
                                 }
                         }
                         header('location:index.php?controller=hoc-sinh&action=');
@@ -55,7 +55,7 @@ switch ($action) {
                     $nam = $_POST['nam'];
                     $mahs = $hocsinh->setID($malop,$nam);
                     if($hocsinh->authenticateTeacherPermit($ss->get('username'),$malop)){
-                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,'1',$mahs,'hs')){
+                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,md5('1'),$mahs,'hs')){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                             echo "<script>alert('Thành Công!')</script>";
                         }
@@ -86,15 +86,13 @@ switch ($action) {
                     $_POST['gioitinh'] == 1 ? $gioitinh = "Nam" : $gioitinh = "Nữ";
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
-                    $matkhau = $_POST['matkhau'];
+                    $matkhau = md5($_POST['matkhau']);
                     if($hocsinh->authenticateStudentPermit($ss->get('username')) AND ($ss->get('username') == $_GET['mahs'])){
                         if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($mahs,$matkhau)){
-                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                            echo "<script>alert('thanh cong')</script>";
+                            header("location: index.php?controller=hoc-sinh&action=info&mahs=$mahs");
                         }
-                        else{
-                            header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                            echo "<script>alert('That bai')</script>";   
+                        else{   
+                            echo "<script>alert('Sửa Thất bại')</script>";   
                         }
                     }
                     else{
