@@ -22,10 +22,16 @@
             <label for="formGroupExampleInput2" class="form-label">Mã Học sinh</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="mahs" value="<?php if(isset($_GET['mahs'])){echo $_GET['mahs'];}else {echo '';}?>">
           </div>
-          <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">Mã môn học</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="mamh">
-          </div>
+          <label for="mamh">Môn học</label>
+          <select name="mamh" id="mamh">
+          <?php
+            foreach($subject AS $value){
+              echo '<option value="'.$value['mamh'].'">'.$value['tenmh'].'</option>';
+            }
+          ?>
+          </select>
+          <br>
+          <br>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mã giáo viên</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="magv">

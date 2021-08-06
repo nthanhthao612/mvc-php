@@ -26,9 +26,10 @@ switch ($action) {
                                 $ngaysinh = $temp[5];
                                 $diachi = $temp[6];
                                 $mahs = $hocsinh->setID($malop,$nam);
+                                $matkhau = md5('1');
                                 if($hocsinh->getInfoStudent($mahs)[0]==0){
                                     $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
-                                    $taikhoan->insertIntoUser($mahs,md5('1'),$mahs,'hs');
+                                    $taikhoan->insertIntoUser($mahs,$matkhau,$mahs,'hs');
                                 }
                         }
                         header('location:index.php?controller=hoc-sinh&action=');
@@ -53,9 +54,10 @@ switch ($action) {
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
                     $nam = $_POST['nam'];
+                    $matkhau = md5('1');
                     $mahs = $hocsinh->setID($malop,$nam);
                     if($hocsinh->authenticateTeacherPermit($ss->get('username'),$malop)){
-                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,md5('1'),$mahs,'hs')){
+                        if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,$matkhau,$mahs,'hs')){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                             echo "<script>alert('Thành Công!')</script>";
                         }

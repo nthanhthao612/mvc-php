@@ -23,10 +23,14 @@
             <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
           </div>
-          <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">Mã môn</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="mamh" value="<?php echo $data['mamh'];?>">
-          </div>
+          <label for="mamh">Môn học</label>
+          <select name="mamh" id="mamh">
+          <?php
+              echo '<option value="'.$data['mamh'].'">'.$data['tenmh'].'</option>';
+          ?>
+          </select>
+          <br>
+          <br>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Năm vào trường</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="namgv" value="<?php echo $data['namgv'];?>">

@@ -11,7 +11,6 @@
           echo '<a href="index.php?controller=giao-vien&action=add" class="btn btn-primary">Thêm</a>';
         }
       ?>
-      
       <div>
         <div id="filter-box" class="search-form">
           <form action="" method="GET">

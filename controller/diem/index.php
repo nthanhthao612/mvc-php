@@ -10,6 +10,7 @@ switch ($action) {
     case 'add':
         {
             $malop = $_GET['malop'];
+            $subject = $diem->getListSubject();
             if($ss->checkLogin() == True AND $ss->get('privilege')=='gv'){
                 if (isset($_POST['add_diem'])){
                     $mahs = $_POST['mahs'];
@@ -77,6 +78,7 @@ switch ($action) {
         }
     case 'edit':
         {
+            $subject = $diem->getListSubject();
             $malop = $_GET['malop'];
             if($ss->checkLogin() == True AND $ss->get('privilege')=='gv'){
                 if(isset($_GET['mahs']) and isset($_GET['mamh']) and isset($_GET['mahk'])){
@@ -84,7 +86,7 @@ switch ($action) {
                     $mamh = $_GET['mamh'];
                     $namhoc = $_GET['namhoc'];
                     $mahk = $_GET['mahk'];
-                    $data = $diem->getSingleMark($mamh,$mahs,$mahk,$namhoc);
+                    $data = $diem->getSingleMark($mamh,$mahs,$mahk,$namhoc);   
                 }
                 if(isset($_POST['edit_diem'])){
                     $mahs = $_POST['mahs'];

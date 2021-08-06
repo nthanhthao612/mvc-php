@@ -21,7 +21,7 @@
             <th scope="row"><h2><?php echo $data['hotendemgv'].' '.$data['tengv'];?></th></h2>
           </tr>
           <tr>
-            <th scope="col">Mã học sinh</th>
+            <th scope="col">Mã giáo viên</th>
             <th scope="row"><h3><?php echo $data['magv'];?></th></h3>
           </tr>
           <tr>
@@ -46,13 +46,22 @@
           </tr>
         </thead>
       </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><h5>Lớp phụ trách</h5></th>
+            <?php
+              foreach($subject AS $value){
+            ?>
+                <th scope='col'><?php echo $value['malop'];?></th>
+            <?php
+              }
+            ?>
+          </tr>
+        </thead>
+      </table> 
     </div>
   </div>
-  <!--                            MAIN content                     -->
-  <!--                            MAIN content                     -->
-  <!--                            MAIN content                     -->
-  <!--                            MAIN content                     -->
-  
 </body>
 
 </html>

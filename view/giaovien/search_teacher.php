@@ -6,7 +6,11 @@
 <body>
   <div id="main-body">
     <div id="main-function">
-      <a href="index.php?controller=hoc-sinh&action=add" class="btn btn-primary">Thêm</a>
+      <?php
+        if($ss->get('username')=='admin'){
+          echo '<a href="index.php?controller=giao-vien&action=add" class="btn btn-primary">Thêm</a>';
+        }
+      ?>
       <div>
         <div id="filter-box" class="search-form">
         <form action="" method="GET">
@@ -38,7 +42,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Mã học sinh</th>
+            <th scope="col">Mã giáo viên</th>
             <th scope="col">Họ và tên Đệm</th>
             <th scope="col">Tên</th>
             <th scope="col">Chức năng</th>

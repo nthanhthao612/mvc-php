@@ -9,6 +9,11 @@ class teacher{
         $result = $this->db->selectALot($sql);
         return $result;
     }
+    public function getListSubject(){
+        $sql = "SELECT * FROM monhoc";
+        $result = $this->db->selectALot($sql);
+        return $result;
+    }
     public function getInfoTeacher($magv){
         $sql = "SELECT * FROM taikhoan AS us, giaovien AS gv, monhoc AS mh WHERE us.magv = gv.magv AND mh.mamh = gv.mamh AND gv.magv = '$magv'";
         $result = $this->db->selectOne($sql);
@@ -63,6 +68,11 @@ class teacher{
             return (int)$this->getMaxID($mamh,$namgv)['MAX(gv.magv)'] + 1;
         }
         
+    }
+    public function getSubject($magv){
+        $sql = "SELECT * FROM monphutrach WHERE magv = '$magv'";
+        $result = $this->db->selectALot($sql);
+        return $result;
     }
 }
 ?>

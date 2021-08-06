@@ -8,6 +8,7 @@ if (isset($_GET['action'])) {
 switch ($action) {
     case 'add':
         {
+            $subject = $diem->getListSubject();
             if($ss->checkLogin() == True AND $ss->get('privilege')=='admin'){
                 if(isset($_POST['add_teacher'])){
                     $hotendemgv = $_POST['hotendemgv'];
@@ -19,8 +20,9 @@ switch ($action) {
                     $diachi = $_POST['diachi'];
                     $magv = $giaovien->setID($mamh,$namgv);
                     $tentk = $magv;
+                    $matkhau = md5('2');
                     if($ss->get('username')=='admin' AND $ss->get('privilege')=='admin'){
-                        if($giaovien->insertIntoTeacher($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($tentk,md5('2'),$magv,'gv')){
+                        if($giaovien->insertIntoTeacher($magv,$hotendemgv,$tengv,$mamh,$namgv,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($tentk,$matkhau,$magv,'gv')){
                             header('location: index.php?controller=giao-vien&action=list');
                             echo "<script>alert('Thành Công!')</script>";
                         }
@@ -100,6 +102,7 @@ switch ($action) {
                 if(isset($_GET['magv'])){
                     $magv = $_GET['magv'];
                     $data = $giaovien->getInfoteacher($magv);
+                    $subject = $giaovien->getSubject($magv);
                 }
                 require_once 'view/giaovien/info_teacher.php';
             }

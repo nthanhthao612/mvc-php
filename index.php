@@ -8,7 +8,7 @@
     include 'model/mark.php';
     include 'model/teacher.php'; 
     include 'model/user.php';
-    error_reporting(0);  
+    // error_reporting(0);  
 ?>
 <?php
 $diem = new mark();
@@ -112,6 +112,7 @@ function printAlertHaveNoPermit(){
                 }
                 if($ss->get('privilege')=='gv'){
                     $data = $giaovien->getInfoTeacher($ss->get('username'));
+                    $subject = $giaovien->getSubject($ss->get('username'));
                     require_once 'view/giaovien/info_teacher.php';
                 }
 

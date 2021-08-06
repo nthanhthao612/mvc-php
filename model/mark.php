@@ -146,7 +146,7 @@ class mark{
         return $result;
     }
     public function getSingleMark($mamh,$mahs,$mahk,$namhoc){
-        $sql = "SELECT * FROM hocsinh AS hs, bangdiem AS bd, monhoc AS mh WHERE mh.mamh = bd.mamh AND hs.mahs = bd.mahs AND bd.mahs = '$mahs' AND bd.mahk = '$mahk' AND bd.mamh = '$mamh' AND bd.namhoc";
+        $sql = "SELECT * FROM hocsinh AS hs, bangdiem AS bd, monhoc AS mh WHERE mh.mamh = bd.mamh AND hs.mahs = bd.mahs AND bd.mahs = '$mahs' AND bd.mahk = '$mahk' AND bd.mamh = '$mamh' AND bd.namhoc = '$namhoc'";
         $result = $this->db->selectOne($sql);
         return $result;
     }

@@ -165,6 +165,19 @@ INSERT INTO `giaovien` (`magv`, `hotendemgv`, `tengv`, `mamh`, `namgv`, `gioitin
 (542015001, 'Lê Thu', 'Hương', 'AV', 2015, 'Nam', '1997-12-08', 'Đồng Nai'),
 (542016001, 'Hồ Trung', 'Dũng', 'TH', 2016, 'Nam', '1998-12-01', 'Bình Định');
 
+
+INSERT INTO `taikhoan`(`tentk`, `matkhau`, `magv`, `mahs`, `quyen`)VALUES
+('412014001','c81e728d9d4c2f636f067f89cc14862c',412014001,NULL,'gv'),
+('412014002','c81e728d9d4c2f636f067f89cc14862c',412014002,NULL,'gv'),
+('412016001','c81e728d9d4c2f636f067f89cc14862c',412016001,NULL,'gv'),
+('412018001','c81e728d9d4c2f636f067f89cc14862c',412018001,NULL,'gv'),
+('442014001','c81e728d9d4c2f636f067f89cc14862c',442014001,NULL,'gv'),
+('442016001','c81e728d9d4c2f636f067f89cc14862c',442016001,NULL,'gv'),
+('442017001','c81e728d9d4c2f636f067f89cc14862c',442017001,NULL,'gv'),
+('442017002','c81e728d9d4c2f636f067f89cc14862c',442017002,NULL,'gv'),
+('542015001','c81e728d9d4c2f636f067f89cc14862c',542015001,NULL,'gv'),
+('542016001','c81e728d9d4c2f636f067f89cc14862c',542016001,NULL,'gv')
+
 /*
 INSERT INTO `hocsinh` (`mahs`, `hotendem`, `ten`, `malop`, `gioitinh`, `nam`, `ngaysinh`, `diachi`) VALUES
 (2013410001, 'Hồ Thị Thanh', 'Hà', '12a1', 'Nữ', 2013, '2000-09-16', 'Đông hòa'),
