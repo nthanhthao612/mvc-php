@@ -8,11 +8,10 @@
     include 'model/mark.php';
     include 'model/teacher.php'; 
     include 'model/user.php';
-    // error_reporting(0);  
+    error_reporting(0);
+    
 ?>
 <?php
-$diem = new mark();
-// $diem->initialize();
 function printAlertLogin(){
     echo '<script type="text/javascript">
  
@@ -69,8 +68,12 @@ function printAlertHaveNoPermit(){
             break;
         }
         case 'diem':{
+            $diem = new mark();
             $hocsinh = new student();
             $lop = new schoolclass();
+            if($_GET['action']=='' OR $_GET['action']=='list'){
+                $diem->initialize();
+            }
             $diem->preprocessorAVE();
             $diem->preprocessorGPA();
             require_once('public/layout/layout.php');
@@ -121,7 +124,9 @@ function printAlertHaveNoPermit(){
             break;
         }
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

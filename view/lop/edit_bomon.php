@@ -11,7 +11,7 @@
       <form action="" method="post">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Mã lớp</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="malop" value="<?php echo $_GET['malop'];?>">
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="malop" value="<?php echo $_GET['malop'];?>" readonly>
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mã giáo viên</label>

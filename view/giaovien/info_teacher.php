@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title>Thông tin giáo viên</title>
 </head>
 
 <body>

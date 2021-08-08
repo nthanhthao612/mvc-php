@@ -10,8 +10,10 @@ class mark{
         return ($diemmieng+$diem15p+$diem1tiet*2+$diemhk*3)/7;
     }
     public function initialize(){
-        $namhoc = 2019; 
-        for($mahk=1;$mahk<3;$mahk++){
+        $namhoc = 2019;
+        $hk = [1,2];
+        // for($mahk=1;$mahk<=2;$mahk++){
+        foreach($hk AS $mahk){
             $temp1 = $this->getListSubject();
             $temp2 = $this->getListStudent();
             foreach($temp1 as $value1){
@@ -66,7 +68,7 @@ class mark{
         return FALSE;
     }
     public function preprocessorGPA(){
-        $listbd = $this->db->selectALot("SELECT mahs,mahk,namhoc FROM bangdiem GROUP BY mahs");
+        $listbd = $this->db->selectALot("SELECT * FROM bangdiem");
         foreach($listbd as $value){
             $mahs = $value['mahs'];
             $mahk = $value['mahk'];
@@ -91,8 +93,13 @@ class mark{
         }
     }
     public function getClassMark(){
-        $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE hs.mahs = tk.mahs AND l.malop = hs.malop AND hs.mahs = bd.mahs GROUP BY l.malop ORDER BY l.malop ASC";
+        $sql = "SELECT tk.namhoc,tk.mahk,l.malop,l.makhoi FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE hs.mahs = tk.mahs AND l.malop = hs.malop AND hs.mahs = bd.mahs GROUP BY l.malop,tk.mahk ORDER BY l.malop ASC";
         $result = $this->db->selectALot($sql);
+        // for($i = 0; $i<count($result);$i++){
+        //     for($j = $i+ 1; $j<count($result);$j++){
+        //         if($result[$i][''] = )
+        //     }
+        // }
         return $result;
     }
     public function getListSubject(){
@@ -111,7 +118,7 @@ class mark{
         return $result;
     }
     public function searchClassMark($search){
-        $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE hs.mahs = tk.mahs AND l.malop = hs.malop AND hs.mahs = bd.mahs AND (l.malop REGEXP '$search') GROUP BY l.malop ORDER BY l.malop ASC";
+        $sql = "SELECT tk.namhoc,tk.mahk,l.malop,l.makhoi FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE hs.mahs = tk.mahs AND l.malop = hs.malop AND hs.mahs = bd.mahs AND (l.malop REGEXP '$search') GROUP BY l.malop,tk.mahk ORDER BY l.malop ASC";
         $result = $this->db->selectALot($sql);
         return $result;
     }
@@ -126,12 +133,12 @@ class mark{
         return $result;
     }
     public function filterDetailClassMark($malop,$mahk,$xeploai,$namhoc){
-        $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE tk.xeploai = '$xeploai' AND (bd.mahs = hs.mahs AND hs.malop = l.malop AND hs.mahs = tk.mahs AND l.malop = '$malop' AND tk.mahk = '$mahk' AND bd.namhoc = '$namhoc') ORDER BY hs.ten ASC";
+        $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE tk.xeploai = '$xeploai' AND (bd.mahs = hs.mahs AND hs.malop = l.malop AND hs.mahs = tk.mahs AND l.malop = '$malop' AND tk.mahk = '$mahk' AND bd.namhoc = '$namhoc') GROUP BY bd.mahs ORDER BY hs.ten ASC";
         $result = $this->db->selectALot($sql);
         return $result;
     }
     public function searchDetailClassMark($malop,$mahk,$namhoc,$search){
-        $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE (hs.hotendem REGEXP '$search' OR hs.ten REGEXP '$search') AND (bd.mahs = hs.mahs AND bd.namhoc = '$namhoc' AND hs.malop = l.malop AND hs.mahs = tk.mahs AND l.malop = '$malop' AND tk.mahk = '$mahk') ORDER BY hs.ten ASC";
+        $sql = "SELECT * FROM hocsinh AS hs,lop AS l,tongket AS tk, bangdiem AS bd WHERE (hs.hotendem REGEXP '$search' OR hs.ten REGEXP '$search') AND (bd.mahs = hs.mahs AND bd.namhoc = '$namhoc' AND hs.malop = l.malop AND hs.mahs = tk.mahs AND l.malop = '$malop' AND tk.mahk = '$mahk') GROUP BY bd.mahs ORDER BY hs.ten ASC";
         $result = $this->db->selectALot($sql);
         return $result;
     }
@@ -156,7 +163,7 @@ class mark{
         return $result;
     }
     public function updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk){
-        $sql = "UPDATE bangdiem SET magv = $magv, diemmieng = $diemmieng,diem15p = $diem15p,diem1tiet=$diem1tiet,diemhk=$diemhk WHERE mahs ='$mahs' AND mamh='$mamh' AND mahk = '$mahk' AND namhoc = '$namhoc'";
+        $sql = "UPDATE bangdiem SET magv = '$magv', diemmieng = $diemmieng,diem15p = $diem15p,diem1tiet=$diem1tiet,diemhk=$diemhk WHERE mahs ='$mahs' AND mamh='$mamh' AND mahk = '$mahk' AND namhoc = '$namhoc'";
         $result = $this->db->update($sql);
         return $result;
     }
@@ -178,7 +185,7 @@ class mark{
         return FALSE;
     }
     public function getMarkSubject($malop,$mahk,$namhoc,$mamh){
-        $sql = "SELECT * FROM bangdiem AS bd, hocsinh AS hs, monhoc AS mh WHERE mh.mamh = bd.mamh AND hs.mahs = bd.mahs AND hs.malop = '$malop' AND bd.mahk = '$mahk' AND bd.namhoc = '$namhoc' AND bd.mamh = '$mamh' ORDER BY hs.ten ASC";
+        $sql = "SELECT * FROM bangdiem AS bd, hocsinh AS hs, monhoc AS mh WHERE mh.mamh = bd.mamh AND hs.mahs = bd.mahs AND hs.malop = '$malop' AND bd.mahk = '$mahk' AND bd.namhoc = '$namhoc' AND bd.mamh = '$mamh' GROUP BY bd.mahs ORDER BY hs.ten ASC";
         $result = $this->db->selectALot($sql);
         return $result;
     }

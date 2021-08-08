@@ -7,16 +7,22 @@
     <div id="main-function"></div>
     <div id="edit-form">
       <form action="" method="post">
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">Mã Khối</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="makhoi">
-          </div>
+          <br>
+          <br>
+          <label for="makhoi">Mã Khối</label>&nbsp;&nbsp;
+          <select name="makhoi" id="makhoi">
+            <option value="10">Khối 10</option>
+            <option value="11">Khối 11</option>
+            <option value="12">Khối 12</option>
+          </select>
+          <br>
+          <br>
           <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">mã lớp</label>
+            <label for="formGroupExampleInput2" class="form-label">Mã lớp</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="malop">
           </div>
           <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">mã giáo viên</label>
+            <label for="formGroupExampleInput2" class="form-label">Mã giáo viên</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="magv">
           </div>
           <div class="mb-3 ">

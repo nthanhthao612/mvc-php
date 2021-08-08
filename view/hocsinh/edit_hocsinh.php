@@ -13,7 +13,7 @@
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
+            <input type="password" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
           </div>
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Họ và tên đệm</label>

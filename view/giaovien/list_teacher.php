@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Danh sach</title>
+  <title></title>
 </head>
 
 <body>

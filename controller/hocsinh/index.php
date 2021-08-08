@@ -30,9 +30,10 @@ switch ($action) {
                                 if($hocsinh->getInfoStudent($mahs)[0]==0){
                                     $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
                                     $taikhoan->insertIntoUser($mahs,$matkhau,$mahs,'hs');
+                                    $flag = 1;
                                 }
                         }
-                        header('location:index.php?controller=hoc-sinh&action=');
+                        header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
                     }
                     require_once 'view/hocsinh/addlist_hocsinh.php';
                 }
@@ -59,6 +60,7 @@ switch ($action) {
                     if($hocsinh->authenticateTeacherPermit($ss->get('username'),$malop)){
                         if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,$matkhau,$mahs,'hs')){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
+                            $flag = 1;
                             echo "<script>alert('Thành Công!')</script>";
                         }
                         else{
@@ -85,16 +87,22 @@ switch ($action) {
                     $hotendem = $_POST['hotendem'];
                     $ten = $_POST['ten'];
                     $malop = $_POST['malop'];
+                    $malop_temp = $data['malop'];
                     $_POST['gioitinh'] == 1 ? $gioitinh = "Nam" : $gioitinh = "Nữ";
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
                     $matkhau = md5($_POST['matkhau']);
                     if($hocsinh->authenticateStudentPermit($ss->get('username')) AND ($ss->get('username') == $_GET['mahs'])){
-                        if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($mahs,$matkhau)){
-                            header("location: index.php?controller=hoc-sinh&action=info&mahs=$mahs");
+                        if(substr($malop,0,2) == substr($malop_temp,0,2)){
+                            if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($mahs,$matkhau)){
+                                header("location: index.php?controller=hoc-sinh&action=info&mahs=$mahs");
+                            }
+                            else{   
+                                echo "<script>alert('Sửa Thất bại')</script>";   
+                            }
                         }
-                        else{   
-                            echo "<script>alert('Sửa Thất bại')</script>";   
+                        else{
+                            echo "<script>alert('Lớp mới phải cùng khối với lớp học cũ')</script>";   
                         }
                     }
                     else{

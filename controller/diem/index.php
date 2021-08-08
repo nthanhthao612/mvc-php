@@ -5,40 +5,7 @@ if (isset($_GET['action'])) {
 } else {
     $action = '';
 }
-
 switch ($action) {
-    case 'add':
-        {
-            $malop = $_GET['malop'];
-            $subject = $diem->getListSubject();
-            if($ss->checkLogin() == True AND $ss->get('privilege')=='gv'){
-                if (isset($_POST['add_diem'])){
-                    $mahs = $_POST['mahs'];
-                    $namhoc = $_POST['namhoc'];
-                    $mahk = $_POST['mahk'];
-                    $mamh = $_POST['mamh'];
-                    $magv = $_POST['magv'];
-                    $diemmieng = $_POST['diemmieng'];
-                    $diem15p = $_POST['diem15p'];
-                    $diem1tiet = $_POST['diem1tiet'];
-                    $diemhk = $_POST['diemhk'];
-                    if($diem->authentication($ss->get('username'),$malop,$mamh)){
-                        if($diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
-                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
-                            echo "<script>alert('Thêm Thành Công!')</script>";
-                        }
-                        else{
-                            echo "<script>alert('Thêm Thất bại!')</script>";
-                        }
-                    }
-                }
-                require_once 'view/diem/add_diem.php';
-            }
-            else{
-                printAlertHaveNoPermit();
-            }
-            break;
-        }
     case 'add-list':
         {
             if($ss->checkLogin() == True AND $ss->get('privilege')=='gv'){
@@ -61,10 +28,9 @@ switch ($action) {
                         $diem1tiet = $temp[8];
                         $diemhk = $temp[9];
                         if($diem->authentication($ss->get('username'),$malop,$mamh)){
-                            if($diem->checkExist($mahs,$namhoc,$mahk,$mamh)[0] == 0)
-                            $diem->insertMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk);
-                        else
-                            $diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk);
+                            if(!$diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
+                                echo '<script>alert("Có lỗi xảy ra")</script>';
+                            }
                         }
                     }
                     header('location:index.php?controller=diem&action=');
@@ -89,11 +55,11 @@ switch ($action) {
                     $data = $diem->getSingleMark($mamh,$mahs,$mahk,$namhoc);   
                 }
                 if(isset($_POST['edit_diem'])){
-                    $mahs = $_POST['mahs'];
-                    $mahk = $_POST['mahk'];
-                    $namhoc = $_POST['namhoc'];
                     $mamh = $_POST['mamh'];
-                    $magv = $_POST['magv'];
+                    $mahs = $_POST['mahs'];
+                    $namhoc = $_POST['namhoc'];
+                    $mahk = $_POST['mahk'];
+                    $magv = $ss->get('username');
                     $diemmieng = $_POST['diemmieng'];
                     $diem15p = $_POST['diem15p'];
                     $diem1tiet = $_POST['diem1tiet'];

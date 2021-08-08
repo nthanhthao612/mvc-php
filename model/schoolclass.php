@@ -72,11 +72,6 @@ class schoolclass{
         array_splice($result,10);
         return $result;
     }
-    // public function checkTeacher($malop,$magv){
-    //     $sql = "SELECT * FROM giaovien AS gv, monphutrach AS mpt, monhoc AS mh WHERE gv.mamh = mh.mamh AND mpt.magv = gv.magv AND mpt.malop = '$malop' AND mpt.magv = '$magv'";
-    //     $result = $this->db->selectOne($sql);
-    //     return $result;
-    // }
     public function updateSubTeacher($malop,$magv,$mamh){
         $sql1 = "SELECT * FROM giaovien WHERE magv = '$magv'";
         $temp = $this->db->selectOne($sql1);

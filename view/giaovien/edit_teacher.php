@@ -21,7 +21,7 @@
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
+            <input type="password" class="form-control info-input-txb" id="formGroupExampleInput2" name="matkhau" placeholder="Bắt buộc thay đổi mật khẩu">
           </div>
           <label for="mamh">Môn học</label>
           <select name="mamh" id="mamh">

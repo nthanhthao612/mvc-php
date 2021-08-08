@@ -13,7 +13,6 @@
       <?php
         $malop = $_GET['malop'];
         if($ss->checkLogin()==TRUE){
-          echo '<a href="index.php?controller=diem&action=add&malop='.$malop.'" class="btn btn-primary">Thêm</a>&emsp;';
           echo '<a href="index.php?controller=diem&action=add-list&malop='.$malop.'" class="btn btn-primary">Thêm với file Excel</a>';
         }
       ?>
