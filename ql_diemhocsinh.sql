@@ -10,7 +10,10 @@ CREATE TABLE hocsinh
     nam INT(4),
     ngaysinh DATE,
     diachi VARCHAR(255),
-    CONSTRAINT hocsinh_PK PRIMARY KEY (mahs)
+    CONSTRAINT hocsinh_PK PRIMARY KEY (mahs),
+    CONSTRAINT check_gioitinh CHECK (gioitinh = 'Nam' OR gioitinh = 'Nữ'),
+    CONSTRAINT check_nam CHECK (nam > 2012),
+    CONSTRAINT check_ngaysinh CHECK (ngaysinh > '2000-1-1')
 );
 CREATE TABLE lop
 (
@@ -27,11 +30,17 @@ CREATE TABLE bangdiem
     mahk INT(1),
     magv INT(9),
     namhoc INT(4),
-    diemmieng float(2,1),
-    diem15p float(2,1),
-    diem1tiet float(2,1),
-    diemhk float(2,1),
-    diemtb float(2,1)
+    diemmieng float(3,1),
+    diem15p float(3,1),
+    diem1tiet float(3,1),
+    diemhk float(3,1),
+    diemtb float(3,1),
+    CONSTRAINT check_namhoc CHECK (namhoc > 2017),
+    CONSTRAINT check_diem15p CHECK (diem15p BETWEEN 0 AND 10),
+    CONSTRAINT check_diemmieng CHECK (diemmieng BETWEEN 0 AND 10),
+    CONSTRAINT check_diem1tiet CHECK (diem1tiet BETWEEN 0 AND 10),
+    CONSTRAINT check_diemhk CHECK (diemhk BETWEEN 0 AND 10),
+    CONSTRAINT check_diemtb CHECK (diemtb BETWEEN 0 AND 10)
 );
 CREATE TABLE monhoc
 (
@@ -57,7 +66,10 @@ CREATE TABLE giaovien
     gioitinh VARCHAR(3),
     ngaysinh DATE,
     diachi VARCHAR(255),
-    PRIMARY KEY(magv)
+    PRIMARY KEY(magv),
+    CONSTRAINT check_gioitinh CHECK (gioitinh = 'Nam' OR gioitinh = 'Nữ'),
+    CONSTRAINT check_nam CHECK (namgv > 2010),
+    CONSTRAINT check_ngaysinh CHECK (ngaysinh > '1970-1-1')
 );
 CREATE TABLE taikhoan
 (
@@ -65,15 +77,19 @@ CREATE TABLE taikhoan
     matkhau VARCHAR(255),
     magv INT(9),
     mahs INT(9),
-    quyen VARCHAR(5)
+    quyen VARCHAR(5),
+    CONSTRAINT check_quyen CHECK (quyen = 'gv' OR quyen = 'hs' OR quyen = 'admin')
 );
 CREATE TABLE tongket
 (
     mahs INT(10),
     mahk INT(1),
-    diemtk float(2,1),
+    diemtk float(3,1),
     xeploai VARCHAR(30),
-    namhoc INT(4)
+    namhoc INT(4),
+    CONSTRAINT check_namhoc CHECK (namhoc > 2017),
+    CONSTRAINT check_diemtk CHECK (diemtk BETWEEN 0 AND 10),
+    CONSTRAINT check_xeploai CHECK (xeploai = 'Giỏi' OR xeploai = 'Khá' OR xeploai = 'Trung Bình' OR xeploai = 'Chưa xếp loại')
 );
 CREATE TABLE monphutrach
 (
