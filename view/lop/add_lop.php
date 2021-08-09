@@ -9,6 +9,13 @@
       <form action="" method="post">
           <br>
           <br>
+          <label for="manm">Nhóm môn</label>
+          <select name="manm" id="manm">
+            <option value="A">Tự nhiên</option>
+            <option value="D">Xã hội</option>
+          </select>
+          <br>
+          <br>
           <label for="makhoi">Mã Khối</label>&nbsp;&nbsp;
           <select name="makhoi" id="makhoi">
             <option value="10">Khối 10</option>
@@ -25,10 +32,7 @@
             <label for="formGroupExampleInput2" class="form-label">Mã giáo viên</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="magv">
           </div>
-          <div class="mb-3 ">
-            <label for="formGroupExampleInput2" class="form-label">Mã nhóm môn</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput3" name="manm">
-          </div>
+          
           <button type="submit" class="btn btn-outline-primary" name="add_lop">submit</button>
         </form>
     </div>

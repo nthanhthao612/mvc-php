@@ -77,11 +77,9 @@ switch ($action) {
         }
     case 'edit':
         {
-            if($ss->checkLogin() == True AND $ss->get('username')==$_GET['mahs']){
-                if(isset($_GET['mahs'])){
-                $mahs = $_GET['mahs'];
-                $data = $hocsinh->getInfoStudent($mahs);
-                }
+            $mahs = $_GET['mahs'];
+            $data = $hocsinh->getInfoStudent($mahs);
+            if($ss->checkLogin() == True AND ($ss->get('username')==$_GET['mahs'] OR $ss->get('username')==$data['magv'])){
                 if(isset($_POST['edit_hocsinh'])){
                     $mahs = $_POST['mahs'];
                     $hotendem = $_POST['hotendem'];
@@ -92,7 +90,7 @@ switch ($action) {
                     $ngaysinh = $_POST['ngaysinh'];
                     $diachi = $_POST['diachi'];
                     $matkhau = md5($_POST['matkhau']);
-                    if($hocsinh->authenticateStudentPermit($ss->get('username')) AND ($ss->get('username') == $_GET['mahs'])){
+                    if(($hocsinh->authenticateStudentPermit($mahs) AND $ss->get('username')==$_GET['mahs']) OR ($ss->get('username')==$data['magv'])){
                         if(substr($malop,0,2) == substr($malop_temp,0,2)){
                             if($hocsinh->updateInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$ngaysinh,$diachi) AND $taikhoan->updateUser($mahs,$matkhau)){
                                 header("location: index.php?controller=hoc-sinh&action=info&mahs=$mahs");
@@ -112,7 +110,7 @@ switch ($action) {
                 require_once 'view/hocsinh/edit_hocsinh.php';
             }
             else{
-                printAlertLogin(); 
+                printAlertHaveNoPermit(); 
             }
             break;
         }
@@ -141,9 +139,9 @@ switch ($action) {
         }
     case 'info':
         {
-            if($ss->checkLogin()){
-                $mahs = $_GET['mahs'];
-                $data = $hocsinh->getInfoStudent($mahs);
+            $mahs = $_GET['mahs'];
+            $data = $hocsinh->getInfoStudent($mahs);
+            if($ss->checkLogin() AND ((string)$ss->get('username') == $_GET['mahs'] OR $ss->get('username') == $data['magv'])){
                 $diem_tmp = $hocsinh->getSummary($mahs);
                 require_once 'view/hocsinh/info_hocsinh.php';
             }

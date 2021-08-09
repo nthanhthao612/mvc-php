@@ -25,7 +25,7 @@
           </div>
           <div class="mb-3 ">
             <label for="formGroupExampleInput2" class="form-label">Mã lớp</label>
-            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="malop" value="<?php echo $data['malop'];?>">
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput2" name="malop" value="<?php echo $data['malop'];?>" <?php if($ss->get('privilege')=='hs'){echo 'readonly';}?>>
           </div>
           <div class="mb-3 ">
           <label for="formGroupExampleInput2" class="form-label">Giới tính</label>

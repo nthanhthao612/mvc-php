@@ -84,6 +84,9 @@ class schoolclass{
     }
     public function searchSubTeacher($magv,$mamh,$malop){
         $sql = "SELECT * FROM giaovien AS gv,monphutrach AS mpt, monhoc AS mh WHERE mpt.magv = gv.magv AND gv.mamh = mh.mamh AND mpt.malop = '$malop' AND mpt.magv = '$magv' AND mpt.mamh = '$mamh'";
+        if($magv == ''){
+            $sql = "SELECT * FROM monphutrach AS mpt, monhoc AS mh WHERE mpt.mamh = mh.mamh AND mpt.malop = '$malop' AND mpt.mamh = '$mamh'";
+        }
         $result = $this->db->selectOne($sql);
         return $result;
     }
