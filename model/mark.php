@@ -2,9 +2,11 @@
 class mark{
     private $db;
     public $temp;
+    public static $flag;
     public function __construct(){
         $this->db = new database();
         $this->temp = array();
+        $this->flag = TRUE;
     }
     public function calculateAVE($diemmieng,$diem15p,$diem1tiet,$diemhk){
         return ($diemmieng+$diem15p+$diem1tiet*2+$diemhk*3)/7;
@@ -167,11 +169,11 @@ class mark{
         $result = $this->db->update($sql);
         return $result;
     }
-    public function deleteMark($mamh,$mahs,$mahk,$namhoc){
-        $sql = "DELETE FROM bangdiem WHERE mahs = '$mahs' AND mamh='$mamh' AND mahk = '$mahk' AND namhoc = '$namhoc'";
-        $result = $this->db->delete($sql);
-        return $result;
-    }
+    // public function deleteMark($mamh,$mahs,$mahk,$namhoc){
+    //     $sql = "DELETE FROM bangdiem WHERE mahs = '$mahs' AND mamh='$mamh' AND mahk = '$mahk' AND namhoc = '$namhoc'";
+    //     $result = $this->db->delete($sql);
+    //     return $result;
+    // }
     public function checkExist($mahs,$namhoc,$mahk,$mamh){
         $sql = "SELECT * FROM bangdiem WHERE mahs = '$mahs' AND mahk = '$mahk' AND mamh = '$mamh' AND namhoc = '$namhoc'";
         $result = $this->db->selectALot($sql);

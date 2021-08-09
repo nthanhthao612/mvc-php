@@ -66,7 +66,6 @@
               <th scope="row"><?php echo $value['tennm']; ?></th>
               <th scope="row"><?php echo $lop->countFigure($value['malop'])[0];?></th>
               <td>
-                  <a href="index.php?controller=hoc-sinh&action=list&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Xem</a>
                   <a href="index.php?controller=lop&action=edit&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Sửa</a>
                   <a href="index.php?controller=lop&action=delete&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Xóa</a>
               </td>

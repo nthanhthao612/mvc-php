@@ -22,7 +22,7 @@ class schoolclass{
         return $result;
     }
     public function getInfoClass($malop){
-        $sql = "SELECT * FROM lop WHERE malop = '$malop'";
+        $sql = "SELECT * FROM lop AS l,giaovien AS gv WHERE gv.magv = l.magv AND l.malop = '$malop'";
         $result = $this->db->selectOne($sql);
         return $result;
     }
@@ -81,6 +81,11 @@ class schoolclass{
             return $result;
         }
 
+    }
+    public function searchSubTeacher($magv,$mamh,$malop){
+        $sql = "SELECT * FROM giaovien AS gv,monphutrach AS mpt, monhoc AS mh WHERE mpt.magv = gv.magv AND gv.mamh = mh.mamh AND mpt.malop = '$malop' AND mpt.magv = '$magv' AND mpt.mamh = '$mamh'";
+        $result = $this->db->selectOne($sql);
+        return $result;
     }
 }
 ?>

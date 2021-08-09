@@ -30,7 +30,7 @@ switch ($action) {
                                 if($hocsinh->getInfoStudent($mahs)[0]==0){
                                     $hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi);
                                     $taikhoan->insertIntoUser($mahs,$matkhau,$mahs,'hs');
-                                    $flag = 1;
+                                    $hocsinh->flag = TRUE;
                                 }
                         }
                         header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
@@ -60,7 +60,7 @@ switch ($action) {
                     if($hocsinh->authenticateTeacherPermit($ss->get('username'),$malop)){
                         if($hocsinh->insertInfo($mahs,$hotendem,$ten,$malop,$gioitinh,$nam,$ngaysinh,$diachi) AND $taikhoan->insertIntoUser($mahs,$matkhau,$mahs,'hs')){
                             header("location: index.php?controller=hoc-sinh&action=list&malop=$malop");
-                            $flag = 1;
+                            $hocsinh->flag = TRUE;
                             echo "<script>alert('Thành Công!')</script>";
                         }
                         else{
@@ -144,6 +144,7 @@ switch ($action) {
             if($ss->checkLogin()){
                 $mahs = $_GET['mahs'];
                 $data = $hocsinh->getInfoStudent($mahs);
+                $diem_tmp = $hocsinh->getSummary($mahs);
                 require_once 'view/hocsinh/info_hocsinh.php';
             }
             else

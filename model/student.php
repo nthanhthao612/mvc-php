@@ -1,8 +1,10 @@
 <?php
 class student{
     private $db;
+    public static $flag;
     public function __construct(){
         $this->db = new database();
+        $this->flag = TRUE;
     }
     public function getListStudent(){
         $sql = "SELECT * FROM hocsinh AS hs,lop AS l WHERE hs.malop = l.malop";
@@ -81,6 +83,11 @@ class student{
             return True;
         else
             return False;
+    }
+    public function getSummary($mahs){
+        $sql = "SELECT * FROM tongket WHERE mahs = '$mahs'";
+        $result = $this->db->selectALot($sql);
+        return $result;
     }
 }
 ?>

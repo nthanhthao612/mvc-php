@@ -88,6 +88,7 @@ switch ($action) {
 
     case 'edit-subteacher':{
             if($ss->checkLogin()==TRUE AND $ss->get('username')=='admin'){
+                $data = $lop->searchSubTeacher($_GET['magv'],$_GET['mamh'],$_GET['malop']);
                 if(isset($_POST['edit_subteacher'])){
                     $malop = $_POST['malop'];
                     $magv = $_POST['magv'];

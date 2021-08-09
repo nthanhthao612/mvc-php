@@ -44,22 +44,20 @@
             <th scope="col">Địa chỉ</th>
             <th scope="row"><?php echo $data['diachi'];?></th>
           </tr>
-        </thead>
-      </table>
-      <table class="table">
-        <thead>
           <tr>
             <th scope="col"><h5>Lớp phụ trách</h5></th>
+            
+            <th scope="row"><h5>
             <?php
               foreach($subject AS $value){
-            ?>
-                <th scope='col'><?php echo $value['malop'];?></th>
-            <?php
+                echo $value['malop'];
+                echo '   ';
               }
             ?>
+            </h5></th>
           </tr>
         </thead>
-      </table> 
+      </table>
     </div>
   </div>
 </body>

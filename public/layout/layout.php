@@ -20,14 +20,13 @@
                 else{
                     echo '<a href="index.php?controller=login" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login&nbsp;&nbsp;</a>';
                 }
-                
             ?>
         </div>
     </nav>
     <div id="left-menu-area">
-        <div class="left-menu-btn"><a href="index.php?controller=hoc-sinh&action="><i class="fas fa-address-card"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Học sinh</a></div>
-        <div class="left-menu-btn"><a href="index.php?controller=diem&action="><i class="fas fa-book-open"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Điểm</a></div>
+        <div class="left-menu-btn"><a href="index.php?controller=hoc-sinh&action="><i class="fas fa-address-card"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DS Học sinh</a></div>
         <div class="left-menu-btn"><a href="index.php?controller=lop&action="><i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lớp</a></div>
+        <div class="left-menu-btn"><a href="index.php?controller=diem&action="><i class="fas fa-book-open"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Điểm</a></div>
         <div class="left-menu-btn"><a href="index.php?controller=giao-vien&action="><i class="fas fa-user-tie"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Giáo viên</a></div>
   </div>
 </body>

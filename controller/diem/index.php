@@ -30,6 +30,7 @@ switch ($action) {
                         if($diem->authentication($ss->get('username'),$malop,$mamh)){
                             if(!$diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
                                 echo '<script>alert("Có lỗi xảy ra")</script>';
+                                $diem->flag = TRUE;
                             }
                         }
                     }
@@ -67,6 +68,7 @@ switch ($action) {
                     if($diem->authentication($ss->get('username'),$_GET['malop'],$mamh)){
                         if($diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
                             header("location: index.php?controller=diem&action=subject&malop=$malop&mahk=$mahk&namhoc=$namhoc&mamh=$mamh");
+                            $diem->flag = TRUE;
                         }
                         else{
                             echo "<script>alert('Sửa Thất bại!')</script>";
@@ -90,10 +92,12 @@ switch ($action) {
                     $mamh = $_GET['mamh'];
                     $mahk = $_GET['mahk'];
                     $namhoc = $_GET['namhoc'];
+                    $magv = $ss->get('username');
                     if($diem->authentication($ss->get('username'),$_GET['malop'],$mamh)){
-                        if($diem->deleteMark($mamh,$mahs,$mahk,$namhoc)){
-                            header("location: index.php?controller=diem&action=info&mahs=$mahs&mahk=$mahk&malop=$malop");
+                        if($diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,0,0,0,0)){
+                            header("location: index.php?controller=diem&action=subject&malop=$malop&mahk=$mahk&namhoc=$namhoc&mamh=$mamh");
                             echo "<script>alert('Xóa Thành Công!')</script>";
+                            $diem->flag = TRUE;
                         }  
                     }
                 }

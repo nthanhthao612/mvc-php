@@ -11,7 +11,7 @@
     <h2>Lớp <?php echo $_GET['malop'];?></h2>
     <br>
     <h4>Sĩ số: <?php echo $lop->countFigure($_GET['malop'])[0];?></h4>
-    <br>
+    <a href="index.php?controller=hoc-sinh&action=list&malop=<?php echo $data[0]['malop'];?>" class="btn btn-primary">Xem danh sách học sinh</a>
     <h4>Giáo viên bộ môn</h4>
       <table class="table">
         <thead>

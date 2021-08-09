@@ -24,6 +24,10 @@
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="malop" value="<?php echo $data['malop'];?>" readonly>
           </div>
           <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Tên giáo viên</label>
+            <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="" value=" <?php echo $data['hotendemgv'].' '.$data['tengv'];?>" readonly>
+          </div>
+          <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Mã giáo viên</label>
             <input type="text" class="form-control info-input-txb" id="formGroupExampleInput1" name="magv" value="<?php echo $data['magv'];?>" >
           </div>

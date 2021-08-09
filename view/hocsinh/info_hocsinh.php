@@ -38,13 +38,38 @@
           </tr>
         </thead>
       </table>
+      <br><br>
+      <h5>Kết quả học tập</h5>
+      <table class="table">
+        <thead>
+        <th scope="col">Năm học</th>
+            <th scope="col">Học kì</th>
+            <th scope="col">Điểm tổng kết</th>
+            <th scope="col">Xếp loại</th>
+            <th scope="col">Chức năng</th>
+          <?php
+            if(!isset($diem_tmp)){
+              echo "Không có dữ liệu hiển thị";
+            }
+            else
+              foreach($diem_tmp AS $value){
+          ?>
+              <tr>
+              <th scope="row"><?php echo $value['namhoc'];?> </th>
+              <th scope="row"><?php echo $value['mahk'];?> </th>
+              <th scope="row"><?php echo $value['diemtk'];?> </th>
+              <th scope="row"><?php echo $value['xeploai'];?> </th>
+              <td>
+                <a href="index.php?controller=diem&action=info&mahs=<?php echo $value['mahs'];?>&mahk=<?php echo $value['mahk'];?>&malop=&namhoc=<?php echo $value['namhoc'];?>" class="btn btn-primary">Xem chi tiết</a>
+              </td>
+            </tr>
+          <?php
+              }
+          ?>
+        </thead>
+      </table>
     </div>
   </div>
-  <!--                            MAIN content                     -->
-  <!--                            MAIN content                     -->
-  <!--                            MAIN content                     -->
-  <!--                            MAIN content                     -->
-  
 </body>
 
 </html>

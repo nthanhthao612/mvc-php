@@ -51,6 +51,9 @@ function printAlertHaveNoPermit(){
 }
 ?>
 <?php
+    $diem = new mark();
+    $hocsinh = new student();
+    $lop = new schoolclass();
     $ss = new Session();
     $ss->init();
     $taikhoan = new user();
@@ -62,26 +65,28 @@ function printAlertHaveNoPermit(){
     }
     switch($controller){
         case 'hoc-sinh':{
-            $hocsinh = new student();
             require_once('public/layout/layout.php');
             require_once('controller/hocsinh/index.php');
             break;
         }
         case 'diem':{
-            $diem = new mark();
-            $hocsinh = new student();
-            $lop = new schoolclass();
-            if($_GET['action']=='' OR $_GET['action']=='list'){
+            // if($_GET['action']=='' OR $_GET['action']=='list'){
+            //     $diem->initialize();
+            // }
+            if($hocsinh->flag == TRUE AND $_GET['action']==''){
                 $diem->initialize();
+                $hocsinh->flag = FALSE;
             }
-            $diem->preprocessorAVE();
-            $diem->preprocessorGPA();
+            if($diem->flag == TRUE){
+                $diem->preprocessorAVE();
+                $diem->preprocessorGPA();
+                $diem->flag = FALSE;
+            }
             require_once('public/layout/layout.php');
             require_once('controller/diem/index.php');
             break;
         }
         case 'lop':{
-            $lop = new schoolclass();
             require_once('public/layout//layout.php');
             require_once('controller/lop/index.php');
             break;
@@ -103,7 +108,6 @@ function printAlertHaveNoPermit(){
             break;
         }
         default:{
-            $hocsinh = new student();
             $giaovien = new teacher();
             if($ss->checkLogin()==FALSE){
                 include_once('view/login/login.php');
@@ -111,6 +115,10 @@ function printAlertHaveNoPermit(){
             if($ss->get('privilege')!='admin'){
                 if($ss->get('privilege')=='hs'){
                     $data = $hocsinh->getInfoStudent($ss->get('username'));
+                    if(!isset($_GET['mahs'])){
+                        $mahs = $ss->get('username');
+                    }
+                    $diem_tmp = $hocsinh->getSummary($mahs);
                     require_once 'view/hocsinh/info_hocsinh.php';
                 }
                 if($ss->get('privilege')=='gv'){

@@ -66,8 +66,7 @@
               <th scope="row"><?php echo $value['ten']; ?> </th>
               <th scope="row"><?php echo $value['malop']; ?> </th>
               <td>
-                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Xem</a>
-                  <a href="index.php?controller=hoc-sinh&action=edit&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Sửa</a>
+                  <a href="index.php?controller=hoc-sinh&action=info&mahs=<?php echo $value['mahs'];?>" class="btn btn-primary">Xem thông tin</a>
                   <a href="index.php?controller=hoc-sinh&action=delete&mahs=<?php echo $value['mahs'];?>&malop=<?php echo $value['malop'];?>" class="btn btn-primary">Xóa</a>
               </td>
             </tr>

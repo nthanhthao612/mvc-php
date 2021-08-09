@@ -7,7 +7,6 @@
 <body>
   <div id="main-body">
     <div id="main-function">
-      <a href="index.php?controller=diem&action=add&mahs=<?php echo $_GET['mahs'];?>&malop=<?php echo $_GET['malop'];?>" class="btn btn-primary">Thêm</a>
     </div>
     <div id="main-content">
     <?php
@@ -32,7 +31,6 @@
             <th scope="col">Điểm 1 tiết</th>
             <th scope="col">Điểm học kỳ</th>
             <th scope="col">Điểm trung bình</th>
-            <th scope="col">Chức năng</th>
           </tr>
         </thead>
           <tbody>
@@ -51,10 +49,6 @@
                 <th scope="row"><?php echo $value['diem1tiet']; ?> </th>
                 <th scope="row"><?php echo $value['diemhk']; ?> </th>
                 <th scope="row"><?php echo $value['diemtb']; ?> </th>
-                <td>
-                    <a href="index.php?controller=diem&action=edit&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>&malop=<?php echo $value['malop'];?>&namhoc=<?php echo $value['namhoc'];?>" class="btn btn-primary">Sửa</a>
-                    <a href="index.php?controller=diem&action=delete&mahs=<?php echo $value['mahs'];?>&mamh=<?php echo $value['mamh'];?>&mahk=<?php echo $value['mahk'];?>&malop=<?php echo $value['malop'];?>&namhoc=<?php echo $value['namhoc'];?>" class="btn btn-primary">Xóa</a>
-                </td>
               </tr>
               <?php
                     }
