@@ -34,7 +34,7 @@ switch ($action) {
                             }
                         }
                     }
-                    header('location:index.php?controller=diem&action=');
+                    header("location: index.php?controller=diem&action=list-detail&malop=$malop&mahk=$mahk&namhoc=$namhoc");
                 }
                 require_once 'view/diem/addlist_diem.php';
             }
@@ -43,6 +43,36 @@ switch ($action) {
             }
             break;
         }
+    // case 'add-list':
+    //     {
+    //             if(isset($_POST['add-list-mark'])){
+    //                 $data = array();
+    //                 if(isset($_FILES['excel']['name'])){
+    //                         $excel = SimpleXLSX::parse($_FILES['excel']['tmp_name']);
+    //                         $data = $excel->rows();
+    //                 }
+    //                 for($i = 1;$i<count($data);$i++){
+    //                     $temp = $data[$i];
+    //                     $mamh = $temp[0];
+    //                     $mahs = $temp[1];
+    //                     $malop = $temp[2];   
+    //                     $namhoc = $temp[3];
+    //                     $mahk = $temp[4];
+    //                     $magv = $temp[5];
+    //                     $diemmieng = $temp[6];
+    //                     $diem15p = $temp[7];
+    //                     $diem1tiet = $temp[8];
+    //                     $diemhk = $temp[9];
+    //                     if($diem->updateMark($mamh,$mahs,$namhoc,$mahk,$magv,$diemmieng,$diem15p,$diem1tiet,$diemhk)){
+    //                         $diem->flag = TRUE;
+                            
+    //                     }
+    //                 }
+    //                 echo '<script>Thanh COng</script>';
+    //         }
+    //         require_once 'view/diem/addlist_diem.php';
+    //         break;
+    //     }  
     case 'edit':
         {
             $subject = $diem->getListSubject();
